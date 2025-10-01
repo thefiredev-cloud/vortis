@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, TrendingUp, Zap, Shield, BarChart3 } from "lucide-react";
+import { ArrowRight, TrendingUp, FileText, Mic, LineChart, Building2, Rocket, Search } from "lucide-react";
 import { OrbBackground } from "@/components/ui/orb-background";
 import { GradientText } from "@/components/ui/gradient-text";
 import { BlurText } from "@/components/ui/blur-text";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { FadeIn } from "@/components/ui/fade-in";
 import { AnimatedCard } from "@/components/ui/animated-card";
+import { StatBar } from "@/components/ui/stat-bar";
 
 export default function Home() {
   return (
@@ -52,7 +53,7 @@ export default function Home() {
 
               <div className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto">
                 <BlurText
-                  text="Advanced AI-powered platform that analyzes SEC filings, regulatory compliance, and real-time market data to deliver institutional-grade trading intelligence."
+                  text="Access comprehensive financial intelligence from 8,000+ public companies and 3M+ private companies. Analyze 10 years of SEC filings, earnings transcripts, and institutional holdings—all in seconds."
                   delay={0.5}
                 />
               </div>
@@ -64,53 +65,110 @@ export default function Home() {
                     <GradientText animate={false}>Try Vortis Free</GradientText>
                   </h3>
                   <p className="text-slate-300 mb-6">
-                    Get 1 free stock analysis to experience the power of AI-driven trading insights
+                    Get 1 free stock analysis with instant SEC filing insights and technical indicators
                   </p>
                   <FreeTrialForm />
                 </div>
               </FadeIn>
 
               {/* Features */}
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <AnimatedCard delay={0.1}>
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-8 h-full hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300">
-                    <Zap className="h-12 w-12 text-emerald-400 mb-4 mx-auto" />
-                    <h3 className="text-lg font-semibold text-white mb-2">
-                      SEC Filing Analysis
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 h-full hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300">
+                    <FileText className="h-10 w-10 text-emerald-400 mb-3 mx-auto" />
+                    <h3 className="text-lg font-semibold text-white mb-2 text-center">
+                      Instant SEC Filing Insights
                     </h3>
-                    <p className="text-slate-400">
-                      Instant insights from 10-K, 10-Q, and 8-K filings with AI-powered pattern detection
+                    <p className="text-slate-400 text-sm text-center mb-3">
+                      Analyze 10-K, 10-Q, and 8-K filings from 8,000+ companies. Extract revenue trends, risk factors, and management commentary in seconds.
                     </p>
+                    <div className="text-xs text-emerald-400/70 text-center font-medium">
+                      10+ years historical
+                    </div>
+                  </div>
+                </AnimatedCard>
+
+                <AnimatedCard delay={0.15}>
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 h-full hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300">
+                    <Mic className="h-10 w-10 text-cyan-400 mb-3 mx-auto" />
+                    <h3 className="text-lg font-semibold text-white mb-2 text-center">
+                      Earnings Call Analysis
+                    </h3>
+                    <p className="text-slate-400 text-sm text-center mb-3">
+                      Access and analyze earnings call transcripts with sentiment analysis. Track management tone and forward guidance instantly.
+                    </p>
+                    <div className="text-xs text-cyan-400/70 text-center font-medium">
+                      10 years of transcripts
+                    </div>
                   </div>
                 </AnimatedCard>
 
                 <AnimatedCard delay={0.2}>
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-8 h-full hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300">
-                    <Shield className="h-12 w-12 text-cyan-400 mb-4 mx-auto" />
-                    <h3 className="text-lg font-semibold text-white mb-2">
-                      Regulatory Tracking
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 h-full hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
+                    <LineChart className="h-10 w-10 text-purple-400 mb-3 mx-auto" />
+                    <h3 className="text-lg font-semibold text-white mb-2 text-center">
+                      20+ Technical Indicators
                     </h3>
-                    <p className="text-slate-400">
-                      Real-time monitoring of compliance changes and regulatory updates that impact your holdings
+                    <p className="text-slate-400 text-sm text-center mb-3">
+                      RSI, MACD, Bollinger Bands, Moving Averages, Fibonacci Retracement, Ichimoku Cloud, and more—updated in real-time.
                     </p>
+                    <div className="text-xs text-purple-400/70 text-center font-medium">
+                      Real-time updates
+                    </div>
+                  </div>
+                </AnimatedCard>
+
+                <AnimatedCard delay={0.25}>
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 h-full hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
+                    <Building2 className="h-10 w-10 text-blue-400 mb-3 mx-auto" />
+                    <h3 className="text-lg font-semibold text-white mb-2 text-center">
+                      13F Filing Monitor
+                    </h3>
+                    <p className="text-slate-400 text-sm text-center mb-3">
+                      Track what institutions are buying and selling. Monitor hedge fund positions and identify emerging investment trends.
+                    </p>
+                    <div className="text-xs text-blue-400/70 text-center font-medium">
+                      Quarterly updates
+                    </div>
                   </div>
                 </AnimatedCard>
 
                 <AnimatedCard delay={0.3}>
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-8 h-full hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
-                    <BarChart3 className="h-12 w-12 text-purple-400 mb-4 mx-auto" />
-                    <h3 className="text-lg font-semibold text-white mb-2">
-                      Market Intelligence
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 h-full hover:border-pink-500/50 hover:shadow-lg hover:shadow-pink-500/20 transition-all duration-300">
+                    <Rocket className="h-10 w-10 text-pink-400 mb-3 mx-auto" />
+                    <h3 className="text-lg font-semibold text-white mb-2 text-center">
+                      Private Market Access
                     </h3>
-                    <p className="text-slate-400">
-                      Comprehensive analysis of market trends, insider trading, and institutional movements
+                    <p className="text-slate-400 text-sm text-center mb-3">
+                      Research 3M+ private companies, track 500k+ funding rounds, and monitor M&A activity across industries.
                     </p>
+                    <div className="text-xs text-pink-400/70 text-center font-medium">
+                      3M+ companies
+                    </div>
+                  </div>
+                </AnimatedCard>
+
+                <AnimatedCard delay={0.35}>
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 h-full hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/20 transition-all duration-300">
+                    <Search className="h-10 w-10 text-orange-400 mb-3 mx-auto" />
+                    <h3 className="text-lg font-semibold text-white mb-2 text-center">
+                      Ultra-Fast Research
+                    </h3>
+                    <p className="text-slate-400 text-sm text-center mb-3">
+                      Comprehensive market research 8-10x faster than traditional methods. No rate limits, unlimited queries.
+                    </p>
+                    <div className="text-xs text-orange-400/70 text-center font-medium">
+                      8-10x faster
+                    </div>
                   </div>
                 </AnimatedCard>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Stats Section */}
+        <StatBar />
 
         {/* Footer */}
         <footer className="border-t border-slate-800 py-12">

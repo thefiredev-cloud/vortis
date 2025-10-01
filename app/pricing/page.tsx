@@ -72,15 +72,19 @@ export default function PricingPage() {
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">SEC filing summaries</span>
+                  <span className="text-slate-300">SEC filing summaries (last 2 years)</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Basic regulatory alerts</span>
+                  <span className="text-slate-300">5 technical indicators (RSI, MACD, SMA, EMA, Volume)</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Email support</span>
+                  <span className="text-slate-300">Daily market alerts via email</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-300">Access to 8,000+ public companies</span>
                 </li>
               </ul>
               <button className="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition-all hover:scale-105">
@@ -104,23 +108,31 @@ export default function PricingPage() {
               <ul className="space-y-4 mb-8">
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Unlimited analyses</span>
+                  <span className="text-slate-300">Unlimited stock analyses</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Deep SEC filing analysis</span>
+                  <span className="text-slate-300">Full SEC filing access (10 years: 10-K, 10-Q, 8-K)</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Real-time regulatory alerts</span>
+                  <span className="text-slate-300">20+ technical indicators with real-time updates</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Insider trading tracking</span>
+                  <span className="text-slate-300">Earnings transcript analysis (10 years)</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Portfolio optimization</span>
+                  <span className="text-slate-300">13F institutional holdings tracking</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-300">Real-time alerts (SMS + Email)</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-300">Portfolio optimization tools</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
@@ -145,27 +157,35 @@ export default function PricingPage() {
               <ul className="space-y-4 mb-8">
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Everything in Pro</span>
+                  <span className="text-slate-300">Everything in Pro, plus:</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Custom analysis models</span>
+                  <span className="text-slate-300">Private company data (3M+ companies)</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Full API access</span>
+                  <span className="text-slate-300">Funding round tracking (500k+ deals)</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Institutional data feeds</span>
+                  <span className="text-slate-300">M&A transaction database (2M+ deals)</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Dedicated support team</span>
+                  <span className="text-slate-300">Full REST API access (unlimited calls)</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">White-label options</span>
+                  <span className="text-slate-300">Custom research requests</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <Check className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-300">Dedicated account manager</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <Check className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-300">White-label options available</span>
                 </li>
               </ul>
               <button className="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-lg transition-all hover:scale-105">
