@@ -145,22 +145,3 @@ export default function Home() {
     </div>
   );
 }
-
-function FreeTrialForm() {
-  return (
-    <form className="flex flex-col sm:flex-row gap-4">
-      <input
-        type="text"
-        placeholder="Enter stock ticker (e.g., AAPL)"
-        className="flex-1 px-6 py-3 bg-white/5 backdrop-blur border border-white/10 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 transition-all"
-      />
-      <ShinyButton
-        type="submit"
-        className="px-8 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold rounded-lg flex items-center justify-center space-x-2"
-      >
-        <span>Analyze Now</span>
-        <ArrowRight className="h-5 w-5" />
-      </ShinyButton>
-    </form>
-  );
-}
