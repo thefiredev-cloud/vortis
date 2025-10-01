@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Check, TrendingUp } from "lucide-react";
-import { DotGrid } from "@/components/ui/dot-grid";
+import { GradientMesh } from "@/components/ui/gradient-mesh";
+import { GridPattern } from "@/components/ui/grid-pattern";
 import { GradientText } from "@/components/ui/gradient-text";
 import { BlurText } from "@/components/ui/blur-text";
 import { AnimatedCard } from "@/components/ui/animated-card";
@@ -9,8 +10,10 @@ import { ShinyButton } from "@/components/ui/shiny-button";
 export default function PricingPage() {
   return (
     <div className="min-h-screen bg-slate-950 relative overflow-hidden">
-      {/* Animated Dot Grid Background */}
-      <DotGrid color="rgba(34, 211, 238, 0.2)" /> {/* cyan color for pricing page */}
+      {/* Gradient Mesh Background */}
+      <GradientMesh />
+      {/* Subtle Grid Pattern Overlay */}
+      <GridPattern opacity={0.15} />
 
       {/* Content */}
       <div className="relative z-10">

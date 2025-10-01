@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, TrendingUp, Zap, Shield, BarChart3 } from "lucide-react";
-import { DotGrid } from "@/components/ui/dot-grid";
+import { GradientMesh } from "@/components/ui/gradient-mesh";
+import { GridPattern } from "@/components/ui/grid-pattern";
 import { GradientText } from "@/components/ui/gradient-text";
 import { BlurText } from "@/components/ui/blur-text";
 import { ShinyButton } from "@/components/ui/shiny-button";
@@ -10,8 +11,10 @@ import { AnimatedCard } from "@/components/ui/animated-card";
 export default function Home() {
   return (
     <div className="min-h-screen bg-slate-950 relative overflow-hidden">
-      {/* Animated Dot Grid Background */}
-      <DotGrid />
+      {/* Gradient Mesh Background */}
+      <GradientMesh />
+      {/* Subtle Grid Pattern Overlay */}
+      <GridPattern />
 
       {/* Content */}
       <div className="relative z-10">
