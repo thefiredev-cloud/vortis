@@ -1,54 +1,64 @@
 import Link from "next/link";
 import { Check, TrendingUp } from "lucide-react";
+import { DotGrid } from "@/components/ui/dot-grid";
+import { GradientText } from "@/components/ui/gradient-text";
+import { BlurText } from "@/components/ui/blur-text";
+import { AnimatedCard } from "@/components/ui/animated-card";
+import { ShinyButton } from "@/components/ui/shiny-button";
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-      {/* Navigation */}
-      <nav className="relative z-10 container mx-auto px-6 py-6 border-b border-slate-800">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <TrendingUp className="h-8 w-8 text-emerald-400" />
-            <span className="text-2xl font-bold text-white">VORTIS</span>
-          </Link>
-          <div className="flex items-center space-x-6">
-            <Link
-              href="/"
-              className="text-slate-300 hover:text-white transition-colors"
-            >
-              Home
-            </Link>
-            <Link
-              href="/dashboard"
-              className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-medium transition-colors"
-            >
-              Get Started
-            </Link>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-slate-950 relative overflow-hidden">
+      {/* Animated Dot Grid Background */}
+      <DotGrid color="rgba(34, 211, 238, 0.2)" /> {/* cyan color for pricing page */}
 
-      {/* Pricing Section */}
-      <div className="container mx-auto px-6 py-20">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Choose Your
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
-                {" "}
-                Trading Plan
-              </span>
-            </h1>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-              Scale your trading strategy with AI-powered insights. All plans
-              include access to Octagon MCP and Claude Sonnet 4.5.
-            </p>
+      {/* Content */}
+      <div className="relative z-10">
+        {/* Navigation */}
+        <nav className="container mx-auto px-6 py-6 border-b border-slate-800/50">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center space-x-2">
+              <TrendingUp className="h-8 w-8 text-emerald-400" />
+              <span className="text-2xl font-bold text-white">VORTIS</span>
+            </Link>
+            <div className="flex items-center space-x-6">
+              <Link
+                href="/"
+                className="text-slate-300 hover:text-white transition-colors"
+              >
+                Home
+              </Link>
+              <Link
+                href="/dashboard"
+                className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-medium transition-colors"
+              >
+                Get Started
+              </Link>
+            </div>
           </div>
+        </nav>
+
+        {/* Pricing Section */}
+        <div className="container mx-auto px-6 py-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h1 className="text-5xl md:text-6xl font-bold mb-6">
+                <span className="text-white">Choose Your </span>
+                <GradientText>Trading Plan</GradientText>
+              </h1>
+              <div className="text-xl text-slate-300 max-w-2xl mx-auto">
+                <BlurText
+                  text="Scale your trading strategy with AI-powered insights. All plans include access to Octagon MCP and Claude Sonnet 4.5."
+                  delay={0.3}
+                />
+              </div>
+            </div>
 
           {/* Pricing Cards */}
           <div className="grid md:grid-cols-3 gap-8">
             {/* Starter */}
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 hover:border-emerald-500/50 transition-all duration-300">
+            <AnimatedCard delay={0.1}>
+              <div className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8 h-full hover:border-emerald-500/50 transition-all duration-300">
               <h3 className="text-2xl font-bold text-white mb-2">Starter</h3>
               <p className="text-slate-400 mb-6">Perfect for beginners</p>
               <div className="mb-8">
@@ -73,13 +83,15 @@ export default function PricingPage() {
                   <span className="text-slate-300">Daily market updates</span>
                 </li>
               </ul>
-              <button className="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition-colors">
+              <button className="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition-all hover:scale-105">
                 Get Started
               </button>
-            </div>
+              </div>
+            </AnimatedCard>
 
             {/* Pro - Featured */}
-            <div className="bg-gradient-to-b from-emerald-500/10 to-cyan-500/10 backdrop-blur-sm border-2 border-emerald-500 rounded-2xl p-8 relative transform md:scale-105 shadow-2xl shadow-emerald-500/20">
+            <AnimatedCard delay={0.2}>
+              <div className="bg-gradient-to-b from-emerald-500/10 to-cyan-500/10 backdrop-blur-xl border-2 border-emerald-500 rounded-2xl p-8 relative transform md:scale-105 shadow-2xl shadow-emerald-500/20 h-full">
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white text-sm font-bold rounded-full">
                 MOST POPULAR
               </div>
@@ -115,13 +127,15 @@ export default function PricingPage() {
                   <span className="text-slate-300">Priority support (24/7)</span>
                 </li>
               </ul>
-              <button className="w-full py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-semibold rounded-lg transition-all duration-200">
+              <ShinyButton className="w-full py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold rounded-lg">
                 Get Started
-              </button>
-            </div>
+              </ShinyButton>
+              </div>
+            </AnimatedCard>
 
             {/* Enterprise */}
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300">
+            <AnimatedCard delay={0.3}>
+              <div className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8 h-full hover:border-purple-500/50 transition-all duration-300">
               <h3 className="text-2xl font-bold text-white mb-2">Enterprise</h3>
               <p className="text-slate-400 mb-6">For institutions</p>
               <div className="mb-8">
@@ -154,10 +168,11 @@ export default function PricingPage() {
                   <span className="text-slate-300">Custom integrations</span>
                 </li>
               </ul>
-              <button className="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-lg transition-colors">
+              <button className="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-lg transition-all hover:scale-105">
                 Contact Sales
               </button>
-            </div>
+              </div>
+            </AnimatedCard>
           </div>
 
           {/* Trust Indicators */}
@@ -168,6 +183,7 @@ export default function PricingPage() {
             </p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
