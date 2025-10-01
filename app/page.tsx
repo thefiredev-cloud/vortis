@@ -138,7 +138,7 @@ export default function Home() {
         {/* Footer */}
         <footer className="border-t border-slate-800 py-12">
           <div className="container mx-auto px-6 text-center text-slate-400">
-            <p>&copy; 2025 Vortis. Revolutionary AI-powered trading intelligence.</p>
+            <p>&copy; {new Date().getFullYear()} Vortis. Revolutionary AI-powered trading intelligence.</p>
           </div>
         </footer>
       </div>

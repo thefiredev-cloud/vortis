@@ -15,8 +15,13 @@ export function LiveCounter() {
   }, []);
 
   return (
-    <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
-      <Activity className="h-3 w-3 text-emerald-400 animate-pulse" />
+    <div
+      className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full"
+      role="status"
+      aria-live="polite"
+      aria-label={`${count.toLocaleString()} stock analyses run today`}
+    >
+      <Activity className="h-3 w-3 text-emerald-400 animate-pulse" aria-hidden="true" />
       <span className="text-xs text-slate-400">
         <span className="text-emerald-400 font-semibold">
           {count.toLocaleString()}

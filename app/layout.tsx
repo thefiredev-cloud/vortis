@@ -31,6 +31,28 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://vortis.ai",
+    siteName: "Vortis",
+    title: "Vortis - AI-Powered Trading Intelligence",
+    description: "Access comprehensive financial intelligence from 8,000+ public companies. Analyze SEC filings, earnings transcripts, and institutional holdings in seconds.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Vortis - AI-Powered Trading Intelligence",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vortis - AI-Powered Trading Intelligence",
+    description: "Access comprehensive financial intelligence from 8,000+ public companies. Analyze SEC filings, earnings transcripts, and institutional holdings in seconds.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
