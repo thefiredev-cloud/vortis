@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, TrendingUp, Zap, Shield, BarChart3 } from "lucide-react";
-import { GradientMesh } from "@/components/ui/gradient-mesh";
-import { GridPattern } from "@/components/ui/grid-pattern";
+import { OrbBackground } from "@/components/ui/orb-background";
 import { GradientText } from "@/components/ui/gradient-text";
 import { BlurText } from "@/components/ui/blur-text";
 import { ShinyButton } from "@/components/ui/shiny-button";
@@ -10,11 +9,9 @@ import { AnimatedCard } from "@/components/ui/animated-card";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-slate-950 relative overflow-hidden">
-      {/* Gradient Mesh Background */}
-      <GradientMesh />
-      {/* Subtle Grid Pattern Overlay */}
-      <GridPattern />
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Orb Background */}
+      <OrbBackground />
 
       {/* Content */}
       <div className="relative z-10">
@@ -62,7 +59,7 @@ export default function Home() {
 
               {/* Free Trial CTA */}
               <FadeIn delay={1.2} className="max-w-2xl mx-auto mb-20">
-                <div className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8 shadow-2xl shadow-emerald-500/10">
+                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl shadow-emerald-500/20 hover:border-emerald-500/30 transition-all duration-300">
                   <h3 className="text-2xl font-bold text-white mb-4">
                     <GradientText animate={false}>Try Vortis Free</GradientText>
                   </h3>
@@ -76,7 +73,7 @@ export default function Home() {
               {/* Features */}
               <div className="grid md:grid-cols-3 gap-8">
                 <AnimatedCard delay={0.1}>
-                  <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-xl p-8 h-full hover:border-emerald-500/30 transition-colors">
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-8 h-full hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300">
                     <Zap className="h-12 w-12 text-emerald-400 mb-4 mx-auto" />
                     <h3 className="text-lg font-semibold text-white mb-2">
                       Real-Time Analysis
@@ -88,7 +85,7 @@ export default function Home() {
                 </AnimatedCard>
 
                 <AnimatedCard delay={0.2}>
-                  <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-xl p-8 h-full hover:border-cyan-500/30 transition-colors">
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-8 h-full hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300">
                     <Shield className="h-12 w-12 text-cyan-400 mb-4 mx-auto" />
                     <h3 className="text-lg font-semibold text-white mb-2">
                       Risk Management
@@ -100,7 +97,7 @@ export default function Home() {
                 </AnimatedCard>
 
                 <AnimatedCard delay={0.3}>
-                  <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-xl p-8 h-full hover:border-purple-500/30 transition-colors">
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-8 h-full hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
                     <BarChart3 className="h-12 w-12 text-purple-400 mb-4 mx-auto" />
                     <h3 className="text-lg font-semibold text-white mb-2">
                       Advanced Metrics
@@ -132,7 +129,7 @@ function FreeTrialForm() {
       <input
         type="text"
         placeholder="Enter stock ticker (e.g., AAPL)"
-        className="flex-1 px-6 py-3 bg-slate-900/80 backdrop-blur border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
+        className="flex-1 px-6 py-3 bg-white/5 backdrop-blur border border-white/10 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 transition-all"
       />
       <ShinyButton
         type="submit"

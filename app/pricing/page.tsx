@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Check, TrendingUp } from "lucide-react";
-import { GradientMesh } from "@/components/ui/gradient-mesh";
-import { GridPattern } from "@/components/ui/grid-pattern";
+import { OrbBackground } from "@/components/ui/orb-background";
 import { GradientText } from "@/components/ui/gradient-text";
 import { BlurText } from "@/components/ui/blur-text";
 import { AnimatedCard } from "@/components/ui/animated-card";
@@ -9,16 +8,14 @@ import { ShinyButton } from "@/components/ui/shiny-button";
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen bg-slate-950 relative overflow-hidden">
-      {/* Gradient Mesh Background */}
-      <GradientMesh />
-      {/* Subtle Grid Pattern Overlay */}
-      <GridPattern opacity={0.15} />
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Orb Background */}
+      <OrbBackground />
 
       {/* Content */}
       <div className="relative z-10">
         {/* Navigation */}
-        <nav className="container mx-auto px-6 py-6 border-b border-slate-800/50">
+        <nav className="container mx-auto px-6 py-6 border-b border-white/10">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-2">
               <TrendingUp className="h-8 w-8 text-emerald-400" />
@@ -61,7 +58,7 @@ export default function PricingPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {/* Starter */}
             <AnimatedCard delay={0.1}>
-              <div className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8 h-full hover:border-emerald-500/50 transition-all duration-300">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 h-full hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300">
               <h3 className="text-2xl font-bold text-white mb-2">Starter</h3>
               <p className="text-slate-400 mb-6">Perfect for beginners</p>
               <div className="mb-8">
@@ -94,7 +91,7 @@ export default function PricingPage() {
 
             {/* Pro - Featured */}
             <AnimatedCard delay={0.2}>
-              <div className="bg-gradient-to-b from-emerald-500/10 to-cyan-500/10 backdrop-blur-xl border-2 border-emerald-500 rounded-2xl p-8 relative transform md:scale-105 shadow-2xl shadow-emerald-500/20 h-full">
+              <div className="bg-gradient-to-b from-emerald-500/20 to-cyan-500/10 backdrop-blur-xl border-2 border-emerald-500/70 rounded-2xl p-8 relative transform md:scale-105 shadow-2xl shadow-emerald-500/40 h-full">
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white text-sm font-bold rounded-full">
                 MOST POPULAR
               </div>
@@ -138,7 +135,7 @@ export default function PricingPage() {
 
             {/* Enterprise */}
             <AnimatedCard delay={0.3}>
-              <div className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8 h-full hover:border-purple-500/50 transition-all duration-300">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 h-full hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
               <h3 className="text-2xl font-bold text-white mb-2">Enterprise</h3>
               <p className="text-slate-400 mb-6">For institutions</p>
               <div className="mb-8">
