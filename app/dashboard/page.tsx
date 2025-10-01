@@ -1,13 +1,13 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { OrbBackground } from "@/components/ui/orb-background";
+import { StockSearch } from "@/components/dashboard/stock-search";
 import {
   LayoutDashboard,
   TrendingUp,
   FileText,
   Settings,
   LogOut,
-  Search,
   Star,
 } from "lucide-react";
 import Link from "next/link";
@@ -121,19 +121,7 @@ export default async function DashboardPage() {
               </div>
 
               {/* Search Bar */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6">
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                  <input
-                    type="text"
-                    placeholder="Enter stock ticker (e.g., AAPL, TSLA, NVDA)"
-                    className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 transition-all text-lg touch-manipulation"
-                  />
-                </div>
-                <button className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-semibold rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98] touch-manipulation">
-                  Analyze Stock
-                </button>
-              </div>
+              <StockSearch />
 
               {/* Stats Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
