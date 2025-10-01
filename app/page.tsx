@@ -7,6 +7,10 @@ import { ShinyButton } from "@/components/ui/shiny-button";
 import { FadeIn } from "@/components/ui/fade-in";
 import { AnimatedCard } from "@/components/ui/animated-card";
 import { StatBar } from "@/components/ui/stat-bar";
+import { SocialProof } from "@/components/sections/social-proof";
+import { HowItWorks } from "@/components/sections/how-it-works";
+import { Testimonials } from "@/components/sections/testimonials";
+import { TrustBadges } from "@/components/sections/trust-badges";
 
 export default function Home() {
   return (
@@ -169,6 +173,18 @@ export default function Home() {
 
         {/* Stats Section */}
         <StatBar />
+
+        {/* Social Proof */}
+        <SocialProof />
+
+        {/* How It Works */}
+        <HowItWorks />
+
+        {/* Testimonials */}
+        <Testimonials />
+
+        {/* Trust Badges */}
+        <TrustBadges />
 
         {/* Footer */}
         <footer className="border-t border-slate-800 py-12">

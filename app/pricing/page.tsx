@@ -5,6 +5,8 @@ import { GradientText } from "@/components/ui/gradient-text";
 import { BlurText } from "@/components/ui/blur-text";
 import { AnimatedCard } from "@/components/ui/animated-card";
 import { ShinyButton } from "@/components/ui/shiny-button";
+import { FeatureComparison } from "@/components/sections/feature-comparison";
+import { TrustBadges } from "@/components/sections/trust-badges";
 
 export default function PricingPage() {
   return (
@@ -195,6 +197,9 @@ export default function PricingPage() {
             </AnimatedCard>
           </div>
 
+          {/* Feature Comparison */}
+          <FeatureComparison />
+
           {/* Trust Indicators */}
           <div className="mt-20 text-center">
             <p className="text-slate-400 mb-4">Trusted by traders worldwide</p>
@@ -202,6 +207,9 @@ export default function PricingPage() {
               All plans include 14-day money-back guarantee • Cancel anytime
             </p>
           </div>
+
+          {/* Trust Badges */}
+          <TrustBadges />
         </div>
       </div>
       </div>
