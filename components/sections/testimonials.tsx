@@ -6,18 +6,21 @@ import { AnimatedCard } from "@/components/ui/animated-card";
 
 const testimonials = [
   {
+    id: "testimonial-michael",
     quote: "Vortis has completely changed how I analyze stocks. What used to take hours now takes seconds. The SEC filing insights are incredible.",
     name: "Michael Chen",
     role: "Day Trader",
     gradient: "from-emerald-400 to-cyan-400",
   },
   {
+    id: "testimonial-sarah",
     quote: "The earnings transcript analysis saved me from a bad investment. I found red flags in management tone that I would have missed otherwise.",
     name: "Sarah Martinez",
     role: "Portfolio Manager",
     gradient: "from-cyan-400 to-blue-400",
   },
   {
+    id: "testimonial-james",
     quote: "As a professional trader, having access to 10 years of data and 20+ technical indicators in one platform is a game-changer. Worth every penny.",
     name: "James Anderson",
     role: "Hedge Fund Analyst",
@@ -34,7 +37,7 @@ export function Testimonials() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial, idx) => (
-            <AnimatedCard key={idx} delay={0.1 * idx}>
+            <AnimatedCard key={testimonial.id} delay={0.1 * idx}>
               <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 h-full touch-manipulation hover:border-white/20 transition-all active:scale-[0.98]">
                 <p className="text-slate-300 mb-6 text-sm md:text-base leading-relaxed">
                   "{testimonial.quote}"

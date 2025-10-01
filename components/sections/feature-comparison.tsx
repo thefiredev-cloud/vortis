@@ -93,9 +93,9 @@ export function FeatureComparison() {
               </tr>
             </thead>
             <tbody>
-              {features.map((feature, idx) => (
+              {features.map((feature) => (
                 <tr
-                  key={idx}
+                  key={feature.name}
                   className="border-b border-white/10 hover:bg-white/5 transition-colors touch-manipulation"
                 >
                   <td className="py-3 md:py-4 pr-4 text-slate-300 text-sm md:text-base">

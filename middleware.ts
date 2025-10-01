@@ -8,9 +8,35 @@ export async function middleware(request: NextRequest) {
     },
   });
 
+  // Protected routes that require authentication
+  const protectedPaths = ["/dashboard"];
+  const isProtectedPath = protectedPaths.some((path) =>
+    request.nextUrl.pathname.startsWith(path)
+  );
+
+  // Auth routes that should redirect to dashboard if logged in
+  const authPaths = ["/auth/login", "/auth/signup"];
+  const isAuthPath = authPaths.some((path) =>
+    request.nextUrl.pathname.startsWith(path)
+  );
+
+  // Only check Supabase auth if we're on a protected or auth route
+  if (!isProtectedPath && !isAuthPath) {
+    return response;
+  }
+
+  // Validate environment variables before creating Supabase client
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL ||
+      !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+      process.env.NEXT_PUBLIC_SUPABASE_URL === 'your_supabase_url' ||
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY === 'your_supabase_anon_key') {
+    console.warn('Supabase credentials not configured - skipping auth check');
+    return response;
+  }
+
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
         getAll() {
@@ -35,18 +61,6 @@ export async function middleware(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  // Protected routes that require authentication
-  const protectedPaths = ["/dashboard"];
-  const isProtectedPath = protectedPaths.some((path) =>
-    request.nextUrl.pathname.startsWith(path)
-  );
-
-  // Auth routes that should redirect to dashboard if logged in
-  const authPaths = ["/auth/login", "/auth/signup"];
-  const isAuthPath = authPaths.some((path) =>
-    request.nextUrl.pathname.startsWith(path)
-  );
 
   // Redirect to login if accessing protected route without auth
   if (isProtectedPath && !user) {
