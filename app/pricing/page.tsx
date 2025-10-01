@@ -7,6 +7,7 @@ import { AnimatedCard } from "@/components/ui/animated-card";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { FeatureComparison } from "@/components/sections/feature-comparison";
 import { TrustBadges } from "@/components/sections/trust-badges";
+import { FAQ } from "@/components/sections/faq";
 
 export default function PricingPage() {
   return (
@@ -207,6 +208,9 @@ export default function PricingPage() {
               All plans include 14-day money-back guarantee • Cancel anytime
             </p>
           </div>
+
+          {/* FAQ Section */}
+          <FAQ />
 
           {/* Trust Badges */}
           <TrustBadges />

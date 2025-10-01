@@ -1,12 +1,9 @@
-import Link from "next/link";
-import { ArrowRight, TrendingUp, FileText, Mic, LineChart, Building2, Rocket, Search } from "lucide-react";
+import { FileText, Mic, LineChart, Building2, Rocket, Search } from "lucide-react";
 import { OrbBackground } from "@/components/ui/orb-background";
-import { GradientText } from "@/components/ui/gradient-text";
-import { BlurText } from "@/components/ui/blur-text";
-import { ShinyButton } from "@/components/ui/shiny-button";
-import { FadeIn } from "@/components/ui/fade-in";
 import { AnimatedCard } from "@/components/ui/animated-card";
 import { StatBar } from "@/components/ui/stat-bar";
+import { FloatingCTA } from "@/components/ui/floating-cta";
+import { EnhancedHero } from "@/components/sections/enhanced-hero";
 import { SocialProof } from "@/components/sections/social-proof";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { Testimonials } from "@/components/sections/testimonials";
@@ -20,63 +17,13 @@ export default function Home() {
 
       {/* Content */}
       <div className="relative z-10">
-        {/* Hero Section */}
-        <div className="relative">
-          {/* Navigation */}
-          <nav className="container mx-auto px-6 py-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <TrendingUp className="h-8 w-8 text-emerald-400" />
-                <span className="text-2xl font-bold text-white">VORTIS</span>
-              </div>
-              <div className="flex items-center space-x-6">
-                <Link
-                  href="/pricing"
-                  className="text-slate-300 hover:text-white transition-colors"
-                >
-                  Pricing
-                </Link>
-                <Link
-                  href="/dashboard"
-                  className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-medium transition-colors"
-                >
-                  Get Started
-                </Link>
-              </div>
-            </div>
-          </nav>
+        {/* Enhanced Hero Section */}
+        <EnhancedHero />
 
-          {/* Hero Content */}
-          <div className="container mx-auto px-6 pt-20 pb-32">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
-                <span className="text-white">AI-Powered Stock</span>
-                <br />
-                <GradientText>Trading Intelligence</GradientText>
-              </h1>
-
-              <div className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto">
-                <BlurText
-                  text="Access comprehensive financial intelligence from 8,000+ public companies and 3M+ private companies. Analyze 10 years of SEC filings, earnings transcripts, and institutional holdings—all in seconds."
-                  delay={0.5}
-                />
-              </div>
-
-              {/* Free Trial CTA */}
-              <FadeIn delay={1.2} className="max-w-2xl mx-auto mb-20">
-                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl shadow-emerald-500/20 hover:border-emerald-500/30 transition-all duration-300">
-                  <h3 className="text-2xl font-bold text-white mb-4">
-                    <GradientText animate={false}>Try Vortis Free</GradientText>
-                  </h3>
-                  <p className="text-slate-300 mb-6">
-                    Get 1 free stock analysis with instant SEC filing insights and technical indicators
-                  </p>
-                  <FreeTrialForm />
-                </div>
-              </FadeIn>
-
-              {/* Features */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Features Section */}
+        <div className="container mx-auto px-6 py-16">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <AnimatedCard delay={0.1}>
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 h-full hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300">
                     <FileText className="h-10 w-10 text-emerald-400 mb-3 mx-auto" />
@@ -166,7 +113,6 @@ export default function Home() {
                     </div>
                   </div>
                 </AnimatedCard>
-              </div>
             </div>
           </div>
         </div>
@@ -185,6 +131,9 @@ export default function Home() {
 
         {/* Trust Badges */}
         <TrustBadges />
+
+        {/* Floating CTA */}
+        <FloatingCTA />
 
         {/* Footer */}
         <footer className="border-t border-slate-800 py-12">
