@@ -16,7 +16,6 @@ export function BlurText({
   animateBy = "word",
 }: BlurTextProps) {
   const items = animateBy === "word" ? text.split(" ") : text.split("");
-  const separator = animateBy === "word" ? " " : "";
 
   return (
     <span className={className}>
@@ -30,10 +29,9 @@ export function BlurText({
             delay: delay + index * 0.05,
             ease: "easeOut",
           }}
-          className="inline-block"
+          style={{ display: "inline-block", marginRight: animateBy === "word" ? "0.25em" : "0" }}
         >
           {item}
-          {index < items.length - 1 && separator}
         </motion.span>
       ))}
     </span>
