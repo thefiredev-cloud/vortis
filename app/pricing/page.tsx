@@ -48,7 +48,7 @@ export default function PricingPage() {
               </h1>
               <div className="text-xl text-slate-300 max-w-2xl mx-auto">
                 <BlurText
-                  text="Scale your trading strategy with AI-powered insights. All plans include access to Octagon MCP and Claude Sonnet 4.5."
+                  text="Scale your trading strategy with comprehensive SEC filing analysis, regulatory tracking, and real-time market intelligence across all plans."
                   delay={0.3}
                 />
               </div>
@@ -72,15 +72,15 @@ export default function PricingPage() {
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Basic market insights</span>
+                  <span className="text-slate-300">SEC filing summaries</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                  <span className="text-slate-300">Basic regulatory alerts</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
                   <span className="text-slate-300">Email support</span>
-                </li>
-                <li className="flex items-start space-x-3">
-                  <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Daily market updates</span>
                 </li>
               </ul>
               <button className="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition-all hover:scale-105">
@@ -108,15 +108,15 @@ export default function PricingPage() {
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Advanced trading signals</span>
+                  <span className="text-slate-300">Deep SEC filing analysis</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Real-time data feeds</span>
+                  <span className="text-slate-300">Real-time regulatory alerts</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Priority processing</span>
+                  <span className="text-slate-300">Insider trading tracking</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-emerald-400 mt-0.5 flex-shrink-0" />
@@ -149,15 +149,15 @@ export default function PricingPage() {
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Custom AI models</span>
+                  <span className="text-slate-300">Custom analysis models</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">API access</span>
+                  <span className="text-slate-300">Full API access</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">White-label options</span>
+                  <span className="text-slate-300">Institutional data feeds</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
@@ -165,7 +165,7 @@ export default function PricingPage() {
                 </li>
                 <li className="flex items-start space-x-3">
                   <Check className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Custom integrations</span>
+                  <span className="text-slate-300">White-label options</span>
                 </li>
               </ul>
               <button className="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-lg transition-all hover:scale-105">

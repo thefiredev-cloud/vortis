@@ -52,7 +52,7 @@ export default function Home() {
 
               <div className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto">
                 <BlurText
-                  text="Harness the power of Claude Sonnet 4.5 and Octagon MCP to make data-driven trading decisions. Revolutionary AI that analyzes markets in real-time."
+                  text="Advanced AI-powered platform that analyzes SEC filings, regulatory compliance, and real-time market data to deliver institutional-grade trading intelligence."
                   delay={0.5}
                 />
               </div>
@@ -76,10 +76,10 @@ export default function Home() {
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-8 h-full hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300">
                     <Zap className="h-12 w-12 text-emerald-400 mb-4 mx-auto" />
                     <h3 className="text-lg font-semibold text-white mb-2">
-                      Real-Time Analysis
+                      SEC Filing Analysis
                     </h3>
                     <p className="text-slate-400">
-                      Instant market insights powered by advanced AI algorithms
+                      Instant insights from 10-K, 10-Q, and 8-K filings with AI-powered pattern detection
                     </p>
                   </div>
                 </AnimatedCard>
@@ -88,10 +88,10 @@ export default function Home() {
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-8 h-full hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300">
                     <Shield className="h-12 w-12 text-cyan-400 mb-4 mx-auto" />
                     <h3 className="text-lg font-semibold text-white mb-2">
-                      Risk Management
+                      Regulatory Tracking
                     </h3>
                     <p className="text-slate-400">
-                      Smart risk assessment to protect your investments
+                      Real-time monitoring of compliance changes and regulatory updates that impact your holdings
                     </p>
                   </div>
                 </AnimatedCard>
@@ -100,10 +100,10 @@ export default function Home() {
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-8 h-full hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
                     <BarChart3 className="h-12 w-12 text-purple-400 mb-4 mx-auto" />
                     <h3 className="text-lg font-semibold text-white mb-2">
-                      Advanced Metrics
+                      Market Intelligence
                     </h3>
                     <p className="text-slate-400">
-                      Comprehensive data visualization and trend analysis
+                      Comprehensive analysis of market trends, insider trading, and institutional movements
                     </p>
                   </div>
                 </AnimatedCard>
