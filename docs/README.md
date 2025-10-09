@@ -5,7 +5,7 @@ Complete documentation for the Vortis authentication and subscription system.
 ## Quick Navigation
 
 ### Getting Started
-- **[Quick Start Guide](./QUICK_START.md)** - 5-minute setup for development
+- **[Quick Start Guide](.quickstart/QUICK_START.md)** - 5-minute setup for development
 - **[Environment Setup Instructions](./ENV_SETUP_INSTRUCTIONS.md)** - Complete .env.local configuration guide
 - **[Environment Variables](./.env.example)** - Required configuration
 
@@ -22,8 +22,8 @@ Complete documentation for the Vortis authentication and subscription system.
 - **[Stripe Testing Checklist](./STRIPE_TESTING_CHECKLIST.md)** - Complete testing procedures
 
 ### Cloudflare & Deployment (NEW)
-- **[Cloudflare Quick Start](../CLOUDFLARE_QUICKSTART.md)** - Deploy in 30 minutes
-- **[Deployment Checklist](../CLOUDFLARE_DEPLOYMENT_CHECKLIST.md)** - Step-by-step production deployment
+- **[Cloudflare Quick Start](..cloudflare/CLOUDFLARE_QUICKSTART.md)** - Deploy in 30 minutes
+- **[Deployment Checklist](..cloudflare/CLOUDFLARE_DEPLOYMENT_CHECKLIST.md)** - Step-by-step production deployment
 - **[Vercel + Cloudflare Setup](./VERCEL_CLOUDFLARE_SETUP.md)** - Detailed configuration guide (RECOMMENDED)
 - **[Deployment Options](./CLOUDFLARE_DEPLOYMENT.md)** - Compare Vercel, Cloudflare Pages, and Hybrid
 - **[Configuration Reference](./CLOUDFLARE_CONFIG_REFERENCE.md)** - All Cloudflare settings explained
@@ -98,7 +98,7 @@ Complete documentation for the Vortis authentication and subscription system.
 1. **Quick Setup** (5 minutes)
    ```bash
    # Follow the Quick Start Guide
-   open docs/QUICK_START.md
+   open docsquickstart/QUICK_START.md
    ```
 
 2. **Detailed Setup**
@@ -122,10 +122,10 @@ Complete documentation for the Vortis authentication and subscription system.
 3. **Cloudflare Deployment** (RECOMMENDED)
    ```bash
    # Follow the Cloudflare Quick Start
-   open ../CLOUDFLARE_QUICKSTART.md
+   open ..cloudflare/CLOUDFLARE_QUICKSTART.md
 
    # Or use the detailed checklist
-   open ../CLOUDFLARE_DEPLOYMENT_CHECKLIST.md
+   open ..cloudflare/CLOUDFLARE_DEPLOYMENT_CHECKLIST.md
    ```
    - Deploy to Vercel
    - Configure Cloudflare DNS
@@ -329,7 +329,7 @@ See [auth-system-documentation.md](./auth-system-documentation.md#troubleshootin
 ## Resources
 
 ### Internal Documentation
-- [Quick Start](./QUICK_START.md)
+- [Quick Start](.quickstart/QUICK_START.md)
 - [Auth System](./auth-system-documentation.md)
 - [Stripe Guide](./stripe-setup-guide.md)
 - [Database Schema](./database-schema.sql)
@@ -371,7 +371,7 @@ When making changes:
 ## Next Steps
 
 1. **Development**
-   - Follow [QUICK_START.md](./QUICK_START.md)
+   - Follow [QUICK_START.md](.quickstart/QUICK_START.md)
    - Test all features
    - Customize as needed
 

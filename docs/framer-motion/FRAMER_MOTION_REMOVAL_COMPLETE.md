@@ -421,8 +421,8 @@ npm run build
 ## Documentation
 
 ### Related Files
-- `/Users/tannerosterkamp/vortis/FRAMER_MOTION_REMOVAL_REPORT.md` - Full technical report
-- `/Users/tannerosterkamp/vortis/FRAMER_MOTION_REMOVAL_SUMMARY.md` - Quick reference
+- `FRAMER_MOTION_REMOVAL_REPORT.md` - Full technical report
+- `FRAMER_MOTION_REMOVAL_SUMMARY.md` - Quick reference
 - `/Users/tannerosterkamp/vortis/scripts/verify-framer-removal.sh` - Verification script
 
 ### CSS Animation Reference

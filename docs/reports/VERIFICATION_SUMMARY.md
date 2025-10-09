@@ -141,11 +141,11 @@ npm run build
 ## Key Files
 
 ### Documentation
-- `/DEPLOYMENT_READY.md` - Complete deployment checklist
-- `/NEXT_STEPS.md` - Detailed roadmap
-- `/FINAL_VERIFICATION_REPORT.md` - Full technical report
-- `/SETUP.md` - Setup instructions
-- `/SETUP_CHECKLIST.md` - Quick reference
+- `DEPLOYMENT_READY.md` - Complete deployment checklist
+- `NEXT_STEPS.md` - Detailed roadmap
+- `FINAL_VERIFICATION_REPORT.md` - Full technical report
+- `../setup/SETUP.md` - Setup instructions
+- `../setup/SETUP_CHECKLIST.md` - Quick reference
 
 ### Configuration
 - `.env.local` - Environment variables (needs setup)
@@ -247,10 +247,10 @@ Add to quality launch:
 ## Support Resources
 
 **Documentation:**
-- Setup: `/SETUP.md`
-- Deployment: `/DEPLOYMENT_READY.md`
-- Next Steps: `/NEXT_STEPS.md`
-- Full Report: `/FINAL_VERIFICATION_REPORT.md`
+- Setup: `../setup/SETUP.md`
+- Deployment: `DEPLOYMENT_READY.md`
+- Next Steps: `NEXT_STEPS.md`
+- Full Report: `FINAL_VERIFICATION_REPORT.md`
 
 **External:**
 - Supabase: https://supabase.com/docs

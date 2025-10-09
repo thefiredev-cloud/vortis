@@ -942,10 +942,10 @@ The application is ready for a staging deployment after completing environment c
 ### D. Key Contacts & Resources
 
 **Documentation:**
-- Setup Guide: `/SETUP.md`
-- Checklist: `/SETUP_CHECKLIST.md`
-- Deployment: `/DEPLOYMENT_READY.md`
-- Next Steps: `/NEXT_STEPS.md`
+- Setup Guide: `../setup/SETUP.md`
+- Checklist: `../setup/SETUP_CHECKLIST.md`
+- Deployment: `DEPLOYMENT_READY.md`
+- Next Steps: `NEXT_STEPS.md`
 
 **External Resources:**
 - Supabase: https://supabase.com/docs

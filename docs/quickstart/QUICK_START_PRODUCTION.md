@@ -642,9 +642,9 @@ git push origin main                     # Push to GitHub
 ## Support
 
 **Documentation:**
-- Full Report: `/FINAL_VERIFICATION_REPORT.md`
-- Next Steps: `/NEXT_STEPS.md`
-- Deployment Guide: `/DEPLOYMENT_READY.md`
+- Full Report: `../reports/FINAL_VERIFICATION_REPORT.md`
+- Next Steps: `../reports/NEXT_STEPS.md`
+- Deployment Guide: `../reports/DEPLOYMENT_READY.md`
 
 **Help:**
 - Supabase: https://supabase.com/docs

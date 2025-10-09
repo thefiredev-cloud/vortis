@@ -90,8 +90,8 @@ npm run dev
   ├─ CLERK_MIGRATION_COMPLETE.md         # Migration details
   ├─ TESTING_CHECKLIST.md                # 25 tests
   └─ ENVIRONMENT_VARIABLES.md            # Env var reference
-/MIGRATION_SUMMARY.md                    # Quick reference
-/README_CLERK_MIGRATION.md               # This file
+docs/migration/MIGRATION_SUMMARY.md                    # Quick reference
+docs/clerk/README_CLERK_MIGRATION.md               # This file
 ```
 
 ### Files to Remove (Optional)

@@ -282,7 +282,7 @@ jobs:
 ## Related Documentation
 
 - **Environment Setup:** `/docs/ENVIRONMENT_SETUP.md`
-- **Setup Checklist:** `/SETUP_CHECKLIST.md`
+- **Setup Checklist:** `../docs/setup/SETUP_CHECKLIST.md`
 - **Validation Script:** `/scripts/check-env.ts`
 - **Full Report:** `/docs/TESTING_SETUP_REPORT.md`
 

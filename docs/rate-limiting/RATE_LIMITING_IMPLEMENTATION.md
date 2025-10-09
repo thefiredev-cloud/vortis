@@ -491,7 +491,7 @@ const result = await rateLimiter.check(identifier);
 **Documentation:**
 - `/docs/RATE_LIMITING.md` - System documentation
 - `/docs/PRODUCTION_DEPLOYMENT.md` - Deployment guide
-- `/RATE_LIMITING_IMPLEMENTATION.md` - This summary
+- `RATE_LIMITING_IMPLEMENTATION.md` - This summary
 
 **Configuration:**
 - `/.env.local` - Environment variables (with Redis config)

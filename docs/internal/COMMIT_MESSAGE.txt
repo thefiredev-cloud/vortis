@@ -84,8 +84,8 @@ All documentation in:
 - /docs/CLERK_MIGRATION_COMPLETE.md - Migration details
 - /docs/TESTING_CHECKLIST.md - Test plan
 - /docs/ENVIRONMENT_VARIABLES.md - Env var reference
-- /MIGRATION_SUMMARY.md - Quick reference
-- /README_CLERK_MIGRATION.md - Comprehensive guide
+- ../migration/MIGRATION_SUMMARY.md - Quick reference
+- ../clerk/README_CLERK_MIGRATION.md - Comprehensive guide
 
 ## Rollback
 

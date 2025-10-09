@@ -92,7 +92,7 @@ const sub = createMockSubscription({ status: 'active' });
 ## Documentation
 
 - Full Guide: `/tests/TESTING_INFRASTRUCTURE.md`
-- Setup Complete: `/TESTING_SETUP_COMPLETE.md`
+- Setup Complete: `TESTING_SETUP_COMPLETE.md`
 - Example Tests: `/tests/api/webhooks/stripe.test.ts`
 
 ## Key Features

@@ -16,7 +16,7 @@
 
 2. **Documentation Created**
    - `/docs/ENV_SETUP_INSTRUCTIONS.md` - Comprehensive setup guide
-   - `/ENV_SETUP_STATUS.md` - Current status tracking
+   - `ENV_SETUP_STATUS.md` - Current status tracking
    - `/scripts/quick-setup.sh` - Interactive validation script
    - Updated `/docs/README.md` with environment setup reference
 
@@ -221,7 +221,7 @@ Required for basic functionality:
 All documentation is available at:
 
 - **Complete Setup Guide:** `/Users/tannerosterkamp/vortis/docs/ENV_SETUP_INSTRUCTIONS.md`
-- **Status Tracking:** `/Users/tannerosterkamp/vortis/ENV_SETUP_STATUS.md`
+- **Status Tracking:** `ENV_SETUP_STATUS.md`
 - **Quick Reference:** Run `./scripts/quick-setup.sh`
 - **Docs Index:** `/Users/tannerosterkamp/vortis/docs/README.md`
 

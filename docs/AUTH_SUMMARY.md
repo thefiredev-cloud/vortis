@@ -126,7 +126,7 @@ Vortis implements a production-ready authentication and subscription system with
 | `/docs/database-schema.sql` | Complete database schema | ✓ New |
 | `/docs/auth-system-documentation.md` | Full system documentation | ✓ New |
 | `/docs/stripe-setup-guide.md` | Stripe setup instructions | ✓ New |
-| `/docs/QUICK_START.md` | 5-minute setup guide | ✓ New |
+| `/docsquickstart/QUICK_START.md` | 5-minute setup guide | ✓ New |
 
 ## Environment Variables Required
 
@@ -434,7 +434,7 @@ export async function POST(request: Request) {
 
 ### Documentation Files
 
-- **Quick Start**: `/docs/QUICK_START.md` - 5-minute setup
+- **Quick Start**: `/docsquickstart/QUICK_START.md` - 5-minute setup
 - **Full Docs**: `/docs/auth-system-documentation.md` - Complete guide
 - **Database**: `/docs/database-schema.sql` - Schema & migrations
 - **Stripe Guide**: `/docs/stripe-setup-guide.md` - Payment setup

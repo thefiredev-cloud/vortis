@@ -137,11 +137,11 @@ vortis/
 /docs/TESTING_CHECKLIST.md              # 25-point test plan
 /docs/ENVIRONMENT_VARIABLES.md          # All env vars explained
 
-/MIGRATION_SUMMARY.md                   # Quick reference (start here)
-/README_CLERK_MIGRATION.md              # Comprehensive guide (main doc)
+../migration/MIGRATION_SUMMARY.md                   # Quick reference (start here)
+README_CLERK_MIGRATION.md              # Comprehensive guide (main doc)
 /CLERK_INSTALLATION.md                  # Installation instructions
 /CLERK_FILES_OVERVIEW.md                # This file
-/COMMIT_MESSAGE.txt                     # Git commit template
+../internal/COMMIT_MESSAGE.txt                     # Git commit template
 ```
 
 ## File Purposes

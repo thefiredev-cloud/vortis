@@ -208,7 +208,7 @@ Errors automatically display inline. Handle them:
 - **Component API**: `/components/auth/README.md`
 - **Examples**: `/components/auth/EXAMPLES.md`
 - **Implementation**: `/components/auth/IMPLEMENTATION_SUMMARY.md`
-- **Checklist**: `/GOOGLE_OAUTH_CHECKLIST.md`
+- **Checklist**: `../../docs/oauth/GOOGLE_OAUTH_CHECKLIST.md`
 
 ## Support
 

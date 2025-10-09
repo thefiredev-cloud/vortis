@@ -46,8 +46,8 @@ npm run dev
 
 ## Documentation
 
-- **Quick Reference:** `/MIGRATION_SUMMARY.md`
-- **Complete Guide:** `/README_CLERK_MIGRATION.md`
+- **Quick Reference:** `../migration/MIGRATION_SUMMARY.md`
+- **Complete Guide:** `../clerk/README_CLERK_MIGRATION.md`
 - **Setup Details:** `/docs/CLERK_SETUP.md`
 - **Testing:** `/docs/TESTING_CHECKLIST.md`
 

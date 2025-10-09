@@ -268,7 +268,7 @@ Hard refresh browser (Ctrl+Shift+R)
 - **Security & Performance:** `/Users/tannerosterkamp/vortis/docs/CLOUDFLARE_SECURITY_PERFORMANCE.md`
 
 **Checklist:**
-- **Deployment Checklist:** `/Users/tannerosterkamp/vortis/CLOUDFLARE_DEPLOYMENT_CHECKLIST.md`
+- **Deployment Checklist:** `CLOUDFLARE_DEPLOYMENT_CHECKLIST.md`
 
 ---
 
@@ -332,4 +332,4 @@ Your deployment is successful when:
 
 Start with: `/Users/tannerosterkamp/vortis/docs/VERCEL_CLOUDFLARE_SETUP.md`
 
-Or use checklist: `/Users/tannerosterkamp/vortis/CLOUDFLARE_DEPLOYMENT_CHECKLIST.md`
+Or use checklist: `CLOUDFLARE_DEPLOYMENT_CHECKLIST.md`

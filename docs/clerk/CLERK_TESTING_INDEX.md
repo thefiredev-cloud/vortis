@@ -38,7 +38,7 @@ Complete index of all Clerk authentication testing documentation.
 
 | File | Description | Location |
 |------|-------------|----------|
-| **CLERK_TESTING_SUMMARY.md** | Overview of all testing documentation | `/Users/tannerosterkamp/vortis/CLERK_TESTING_SUMMARY.md` |
+| **CLERK_TESTING_SUMMARY.md** | Overview of all testing documentation | `CLERK_TESTING_SUMMARY.md` |
 | **CLERK_TESTING_INDEX.md** | This file - Complete index of all documentation | `/Users/tannerosterkamp/vortis/CLERK_TESTING_INDEX.md` |
 
 ---
@@ -162,7 +162,7 @@ Complete index of all Clerk authentication testing documentation.
 ## How to Use This Index
 
 ### For New Team Members
-1. Start with [CLERK_TESTING_SUMMARY.md](/Users/tannerosterkamp/vortis/CLERK_TESTING_SUMMARY.md)
+1. Start with [CLERK_TESTING_SUMMARY.md](CLERK_TESTING_SUMMARY.md)
 2. Review your role-specific docs (see "Quick Access by Role" above)
 3. Follow testing sequence in "Quick Access by Testing Phase"
 

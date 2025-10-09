@@ -6,8 +6,8 @@ Quick navigation to all design system documentation and implementation files.
 
 Start here if you're new to the design system:
 
-1. **[DESIGN_SYSTEM_README.md](/Users/tannerosterkamp/vortis/DESIGN_SYSTEM_README.md)** - Overview and quick start
-2. **[DESIGN_QUICK_REFERENCE.md](/Users/tannerosterkamp/vortis/DESIGN_QUICK_REFERENCE.md)** - One-page cheat sheet
+1. **[DESIGN_SYSTEM_README.md](DESIGN_SYSTEM_README.md)** - Overview and quick start
+2. **[DESIGN_QUICK_REFERENCE.md](DESIGN_QUICK_REFERENCE.md)** - One-page cheat sheet
 3. **[lib/design-tokens.ts](/Users/tannerosterkamp/vortis/lib/design-tokens.ts)** - Import and use tokens
 
 ## Documentation Files
@@ -16,23 +16,23 @@ Start here if you're new to the design system:
 
 | File | Description | Use When |
 |------|-------------|----------|
-| **[DESIGN_SYSTEM_README.md](/Users/tannerosterkamp/vortis/DESIGN_SYSTEM_README.md)** | Complete overview, getting started guide | First time using system |
-| **[DESIGN_SYSTEM.md](/Users/tannerosterkamp/vortis/DESIGN_SYSTEM.md)** | Comprehensive design system spec | Building new features |
-| **[DESIGN_QUICK_REFERENCE.md](/Users/tannerosterkamp/vortis/DESIGN_QUICK_REFERENCE.md)** | One-page cheat sheet | Daily development |
-| **[VISUAL_GUIDE.md](/Users/tannerosterkamp/vortis/VISUAL_GUIDE.md)** | Visual examples with diagrams | Understanding visual patterns |
+| **[DESIGN_SYSTEM_README.md](DESIGN_SYSTEM_README.md)** | Complete overview, getting started guide | First time using system |
+| **[DESIGN_SYSTEM.md](DESIGN_SYSTEM.md)** | Comprehensive design system spec | Building new features |
+| **[DESIGN_QUICK_REFERENCE.md](DESIGN_QUICK_REFERENCE.md)** | One-page cheat sheet | Daily development |
+| **[VISUAL_GUIDE.md](VISUAL_GUIDE.md)** | Visual examples with diagrams | Understanding visual patterns |
 
 ### Component Documentation
 
 | File | Description | Use When |
 |------|-------------|----------|
-| **[COMPONENT_LIBRARY.md](/Users/tannerosterkamp/vortis/COMPONENT_LIBRARY.md)** | Copy-paste component patterns | Building UI components |
+| **[COMPONENT_LIBRARY.md](COMPONENT_LIBRARY.md)** | Copy-paste component patterns | Building UI components |
 | **[components/examples/design-token-examples.tsx](/Users/tannerosterkamp/vortis/components/examples/design-token-examples.tsx)** | Working code examples | Learning implementation |
 
 ### Accessibility
 
 | File | Description | Use When |
 |------|-------------|----------|
-| **[ACCESSIBILITY_REPORT.md](/Users/tannerosterkamp/vortis/ACCESSIBILITY_REPORT.md)** | WCAG compliance guide | Ensuring accessibility |
+| **[ACCESSIBILITY_REPORT.md](ACCESSIBILITY_REPORT.md)** | WCAG compliance guide | Ensuring accessibility |
 
 ## Implementation Files
 
@@ -67,56 +67,56 @@ Start here if you're new to the design system:
 
 #### Build a new page
 
-1. Read: [DESIGN_SYSTEM_README.md](/Users/tannerosterkamp/vortis/DESIGN_SYSTEM_README.md) - Basic structure section
+1. Read: [DESIGN_SYSTEM_README.md](DESIGN_SYSTEM_README.md) - Basic structure section
 2. Copy from: [app/page.tsx](/Users/tannerosterkamp/vortis/app/page.tsx)
 3. Use tokens from: [lib/design-tokens.ts](/Users/tannerosterkamp/vortis/lib/design-tokens.ts)
 
 #### Create a new component
 
-1. Reference: [COMPONENT_LIBRARY.md](/Users/tannerosterkamp/vortis/COMPONENT_LIBRARY.md)
+1. Reference: [COMPONENT_LIBRARY.md](COMPONENT_LIBRARY.md)
 2. Copy patterns from: [components/examples/design-token-examples.tsx](/Users/tannerosterkamp/vortis/components/examples/design-token-examples.tsx)
 3. Use tokens: Import from `@/lib/design-tokens`
 
 #### Style a button
 
-1. Quick ref: [DESIGN_QUICK_REFERENCE.md](/Users/tannerosterkamp/vortis/DESIGN_QUICK_REFERENCE.md) - Common Patterns
-2. Full patterns: [COMPONENT_LIBRARY.md](/Users/tannerosterkamp/vortis/COMPONENT_LIBRARY.md) - Buttons section
+1. Quick ref: [DESIGN_QUICK_REFERENCE.md](DESIGN_QUICK_REFERENCE.md) - Common Patterns
+2. Full patterns: [COMPONENT_LIBRARY.md](COMPONENT_LIBRARY.md) - Buttons section
 3. Use: `designTokens.button.primary`
 
 #### Style a card
 
-1. Quick ref: [DESIGN_QUICK_REFERENCE.md](/Users/tannerosterkamp/vortis/DESIGN_QUICK_REFERENCE.md) - Feature Card
-2. Full patterns: [COMPONENT_LIBRARY.md](/Users/tannerosterkamp/vortis/COMPONENT_LIBRARY.md) - Cards section
+1. Quick ref: [DESIGN_QUICK_REFERENCE.md](DESIGN_QUICK_REFERENCE.md) - Feature Card
+2. Full patterns: [COMPONENT_LIBRARY.md](COMPONENT_LIBRARY.md) - Cards section
 3. Use: `designTokens.card.hover`
 
 #### Choose colors
 
-1. Visual: [VISUAL_GUIDE.md](/Users/tannerosterkamp/vortis/VISUAL_GUIDE.md) - Color Swatches
-2. Usage: [DESIGN_SYSTEM.md](/Users/tannerosterkamp/vortis/DESIGN_SYSTEM.md) - Color Palette
-3. Accessibility: [ACCESSIBILITY_REPORT.md](/Users/tannerosterkamp/vortis/ACCESSIBILITY_REPORT.md) - Color Contrast
+1. Visual: [VISUAL_GUIDE.md](VISUAL_GUIDE.md) - Color Swatches
+2. Usage: [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) - Color Palette
+3. Accessibility: [ACCESSIBILITY_REPORT.md](ACCESSIBILITY_REPORT.md) - Color Contrast
 
 #### Set up forms
 
-1. Patterns: [COMPONENT_LIBRARY.md](/Users/tannerosterkamp/vortis/COMPONENT_LIBRARY.md) - Form Elements
+1. Patterns: [COMPONENT_LIBRARY.md](COMPONENT_LIBRARY.md) - Form Elements
 2. Examples: [components/examples/design-token-examples.tsx](/Users/tannerosterkamp/vortis/components/examples/design-token-examples.tsx) - SearchFormExample
 3. Use: `designTokens.input.default`
 
 #### Add animations
 
-1. Guide: [DESIGN_SYSTEM.md](/Users/tannerosterkamp/vortis/DESIGN_SYSTEM.md) - Utilities section
+1. Guide: [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) - Utilities section
 2. Config: [tailwind.config.ts](/Users/tannerosterkamp/vortis/tailwind.config.ts) - Animation definitions
 3. CSS: [app/globals.css](/Users/tannerosterkamp/vortis/app/globals.css) - Keyframes
 
 #### Ensure accessibility
 
-1. Report: [ACCESSIBILITY_REPORT.md](/Users/tannerosterkamp/vortis/ACCESSIBILITY_REPORT.md)
-2. Focus states: [COMPONENT_LIBRARY.md](/Users/tannerosterkamp/vortis/COMPONENT_LIBRARY.md) - Accessibility section
+1. Report: [ACCESSIBILITY_REPORT.md](ACCESSIBILITY_REPORT.md)
+2. Focus states: [COMPONENT_LIBRARY.md](COMPONENT_LIBRARY.md) - Accessibility section
 3. Touch targets: [app/globals.css](/Users/tannerosterkamp/vortis/app/globals.css) - Touch optimization
 
 #### Make it responsive
 
-1. Breakpoints: [DESIGN_QUICK_REFERENCE.md](/Users/tannerosterkamp/vortis/DESIGN_QUICK_REFERENCE.md) - Responsive Breakpoints
-2. Patterns: [COMPONENT_LIBRARY.md](/Users/tannerosterkamp/vortis/COMPONENT_LIBRARY.md) - Responsive Utilities
+1. Breakpoints: [DESIGN_QUICK_REFERENCE.md](DESIGN_QUICK_REFERENCE.md) - Responsive Breakpoints
+2. Patterns: [COMPONENT_LIBRARY.md](COMPONENT_LIBRARY.md) - Responsive Utilities
 3. Grids: Use `designTokens.grid.*`
 
 ## Common Imports
@@ -253,7 +253,7 @@ designTokens.layout.page
 
 Before deploying new components:
 
-- [ ] Check [ACCESSIBILITY_REPORT.md](/Users/tannerosterkamp/vortis/ACCESSIBILITY_REPORT.md) for requirements
+- [ ] Check [ACCESSIBILITY_REPORT.md](ACCESSIBILITY_REPORT.md) for requirements
 - [ ] Verify color contrast with tools
 - [ ] Test keyboard navigation
 - [ ] Verify 44x44px touch targets on mobile
@@ -267,8 +267,8 @@ Before deploying new components:
 For questions or issues with the design system:
 
 1. Check this index for relevant documentation
-2. Review [DESIGN_QUICK_REFERENCE.md](/Users/tannerosterkamp/vortis/DESIGN_QUICK_REFERENCE.md) for quick answers
-3. Reference [COMPONENT_LIBRARY.md](/Users/tannerosterkamp/vortis/COMPONENT_LIBRARY.md) for patterns
+2. Review [DESIGN_QUICK_REFERENCE.md](DESIGN_QUICK_REFERENCE.md) for quick answers
+3. Reference [COMPONENT_LIBRARY.md](COMPONENT_LIBRARY.md) for patterns
 4. Look at working examples in `/components/examples/`
 
 ## Contributing
@@ -278,7 +278,7 @@ When adding to the design system:
 1. Update relevant MD files
 2. Add examples to `design-token-examples.tsx`
 3. Update this index if needed
-4. Follow existing patterns in [DESIGN_SYSTEM.md](/Users/tannerosterkamp/vortis/DESIGN_SYSTEM.md)
+4. Follow existing patterns in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md)
 5. Ensure accessibility compliance
 
 ---

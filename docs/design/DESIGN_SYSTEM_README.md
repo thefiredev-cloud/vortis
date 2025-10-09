@@ -422,10 +422,10 @@ import { cn } from "@/lib/design-tokens";
 
 ```
 /lib/design-tokens.ts        # TypeScript design tokens
-/DESIGN_SYSTEM.md           # Full documentation
-/COMPONENT_LIBRARY.md       # Component patterns
-/DESIGN_QUICK_REFERENCE.md  # Quick reference
-/ACCESSIBILITY_REPORT.md    # Accessibility guide
+DESIGN_SYSTEM.md           # Full documentation
+COMPONENT_LIBRARY.md       # Component patterns
+DESIGN_QUICK_REFERENCE.md  # Quick reference
+ACCESSIBILITY_REPORT.md    # Accessibility guide
 ```
 
 ### Example Components
