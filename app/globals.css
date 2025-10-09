@@ -304,8 +304,86 @@ button, a {
   }
 }
 
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
 .icon-animate {
   animation: scaleIn 0.3s ease-out forwards;
+}
+
+.icon-animate-enter {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+.icon-animate-exit {
+  animation: scaleOut 0.3s ease-out forwards;
+}
+
+/* Error message animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-message-enter {
+  animation: slideDown 0.2s ease-out forwards;
+}
+
+.error-message-exit {
+  animation: slideDown 0.2s ease-out reverse forwards;
+}
+
+/* FAQ accordion animations */
+@keyframes rotate180 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes expandHeight {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 500px;
+    opacity: 1;
+  }
+}
+
+.faq-chevron-open {
+  animation: rotate180 0.2s ease-out forwards;
+}
+
+.faq-chevron-closed {
+  animation: rotate180 0.2s ease-out reverse forwards;
+}
+
+.faq-content-open {
+  animation: expandHeight 0.2s ease-out forwards;
+  overflow: hidden;
+}
+
+.faq-content-closed {
+  animation: expandHeight 0.2s ease-out reverse forwards;
+  overflow: hidden;
 }
 
 /* Intersection Observer animations */
@@ -324,18 +402,69 @@ button, a {
   animation: observerFadeIn 0.6s ease-out forwards;
 }
 
+/* BlurText animations */
+@keyframes blurFadeIn {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+.blur-text-item {
+  display: inline-block;
+  animation: blurFadeIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* FloatingCTA animations */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(100px) translateX(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateX(-50%);
+  }
+}
+
+.floating-cta-enter {
+  animation: slideUpFade 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.floating-cta-exit {
+  animation: slideUpFade 0.3s ease-out reverse forwards;
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .animated-card,
   .fade-in,
   .shiny-button,
   .icon-animate,
-  .observer-animate {
+  .icon-animate-enter,
+  .icon-animate-exit,
+  .observer-animate,
+  .blur-text-item,
+  .floating-cta-enter,
+  .floating-cta-exit,
+  .error-message-enter,
+  .error-message-exit,
+  .faq-chevron-open,
+  .faq-chevron-closed,
+  .faq-content-open,
+  .faq-content-closed {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
+    max-height: none !important;
   }
-  
+
   .animated-card:hover,
   .shiny-button:hover {
     transform: none !important;

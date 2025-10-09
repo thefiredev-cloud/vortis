@@ -4,6 +4,7 @@ import { Webhook } from 'svix';
 import { supabaseAdmin } from '@/lib/supabase/admin';
 import { logger } from '@/lib/logger';
 import { securityLogger } from '@/lib/security-logger';
+import { RateLimiter, RateLimitPresets, addRateLimitHeaders } from '@/lib/rate-limit';
 
 /**
  * Clerk Webhook Handler
@@ -27,7 +28,40 @@ import { securityLogger } from '@/lib/security-logger';
  * - delete_user_from_clerk(): Deletes user and related data
  */
 
+// Rate limiter for webhook endpoint
+const rateLimiter = new RateLimiter(RateLimitPresets.WEBHOOK);
+
 export async function POST(req: Request) {
+  // Apply rate limiting (100 requests per minute per IP)
+  const headersList = await headers();
+  const forwarded = headersList.get('x-forwarded-for');
+  const ip = forwarded?.split(',')[0].trim() || 'unknown';
+  const identifier = `ip:${ip}`;
+
+  const rateLimitResult = await rateLimiter.check(identifier);
+
+  if (!rateLimitResult.allowed) {
+    const responseHeaders = new Headers();
+    addRateLimitHeaders(responseHeaders, rateLimitResult);
+
+    securityLogger.suspiciousActivity('Clerk webhook rate limit exceeded', {
+      severity: 'high',
+      ipAddress: ip,
+      endpoint: '/api/webhooks/clerk',
+    });
+
+    return Response.json(
+      {
+        error: 'Rate limit exceeded',
+        retryAfter: rateLimitResult.resetIn,
+      },
+      {
+        status: 429,
+        headers: responseHeaders,
+      }
+    );
+  }
+
   // Verify webhook secret is configured
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
 
@@ -41,11 +75,10 @@ export async function POST(req: Request) {
     );
   }
 
-  // Get headers for webhook verification
-  const headerPayload = await headers();
-  const svix_id = headerPayload.get('svix-id');
-  const svix_timestamp = headerPayload.get('svix-timestamp');
-  const svix_signature = headerPayload.get('svix-signature');
+  // Get headers for webhook verification (headersList already defined above)
+  const svix_id = headersList.get('svix-id');
+  const svix_timestamp = headersList.get('svix-timestamp');
+  const svix_signature = headersList.get('svix-signature');
 
   // Verify required headers are present
   if (!svix_id || !svix_timestamp || !svix_signature) {

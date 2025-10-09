@@ -3,7 +3,6 @@
 import { useState, useCallback, type FormEvent, type ChangeEvent } from "react";
 import Link from "next/link";
 import { TrendingUp, ArrowRight, CheckCircle2, AlertCircle } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { GradientText } from "@/components/ui/gradient-text";
 import { BlurText } from "@/components/ui/blur-text";
 import { FadeIn } from "@/components/ui/fade-in";
@@ -91,30 +90,22 @@ function TickerInput({
             autoComplete="off"
             autoCapitalize="characters"
           />
-          <AnimatePresence>
-            {isSuccess && (
-              <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0, opacity: 0 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2"
-                aria-hidden="true"
-              >
-                <CheckCircle2 className="h-6 w-6 text-emerald-400" />
-              </motion.div>
-            )}
-            {error && !isSuccess && (
-              <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0, opacity: 0 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2"
-                aria-hidden="true"
-              >
-                <AlertCircle className="h-6 w-6 text-red-400" />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {isSuccess && (
+            <div
+              className="absolute right-4 top-1/2 -translate-y-1/2 icon-animate-enter"
+              aria-hidden="true"
+            >
+              <CheckCircle2 className="h-6 w-6 text-emerald-400" />
+            </div>
+          )}
+          {error && !isSuccess && (
+            <div
+              className="absolute right-4 top-1/2 -translate-y-1/2 icon-animate-enter"
+              aria-hidden="true"
+            >
+              <AlertCircle className="h-6 w-6 text-red-400" />
+            </div>
+          )}
         </div>
 
         <ShinyButton
@@ -146,20 +137,15 @@ function TickerInput({
         </ShinyButton>
       </form>
 
-      <AnimatePresence>
-        {error && (
-          <motion.p
-            id="ticker-error"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="text-red-400 text-sm mt-3 ml-2"
-            role="alert"
-          >
-            {error}
-          </motion.p>
-        )}
-      </AnimatePresence>
+      {error && (
+        <p
+          id="ticker-error"
+          className="text-red-400 text-sm mt-3 ml-2 error-message-enter"
+          role="alert"
+        >
+          {error}
+        </p>
+      )}
 
       <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
         <span className="text-sm text-slate-400 font-medium">Popular:</span>

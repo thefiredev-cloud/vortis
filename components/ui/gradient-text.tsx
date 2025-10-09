@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
 interface GradientTextProps {
@@ -19,13 +18,13 @@ export function GradientText({
   animate = true,
 }: GradientTextProps) {
   return (
-    <motion.span
-      initial={animate ? { opacity: 0, y: 20 } : {}}
-      animate={animate ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className={`bg-gradient-to-r ${from} ${to} bg-clip-text text-transparent font-bold ${className}`}
+    <span
+      className={`bg-gradient-to-r ${from} ${to} bg-clip-text text-transparent font-bold ${
+        animate ? "fade-in-up" : ""
+      } ${className}`}
+      style={animate ? { animationDuration: "0.8s" } : undefined}
     >
       {children}
-    </motion.span>
+    </span>
   );
 }

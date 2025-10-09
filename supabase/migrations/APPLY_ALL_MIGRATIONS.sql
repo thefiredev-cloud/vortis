@@ -164,9 +164,12 @@ COMMENT ON COLUMN public.usage_tracking.analyses_limit IS 'Max analyses allowed 
 -- Apply remaining migrations by reading from files
 -- =====================================================
 
-\echo 'Migration 002 and 20251009000001 applied successfully'
-\echo 'Please run the following migrations manually in this order:'
-\echo '1. supabase/migrations/20251009000002_create_api_usage_table.sql'
-\echo '2. supabase/migrations/20251009000003_create_user_preferences_table.sql'
-\echo '3. supabase/migrations/20251009000004_create_watchlist_alerts_table.sql'
-\echo '4. supabase/migrations/20251009000005_create_admin_views_functions.sql'
+DO $$
+BEGIN
+  RAISE NOTICE 'Migration 002 and 20251009000001 applied successfully';
+  RAISE NOTICE 'Please run the following migrations manually in this order:';
+  RAISE NOTICE '1. supabase/migrations/20251009000002_create_api_usage_table.sql';
+  RAISE NOTICE '2. supabase/migrations/20251009000003_create_user_preferences_table.sql';
+  RAISE NOTICE '3. supabase/migrations/20251009000004_create_watchlist_alerts_table.sql';
+  RAISE NOTICE '4. supabase/migrations/20251009000005_create_admin_views_functions.sql';
+END $$;

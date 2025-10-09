@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
 interface ShinyButtonProps {
@@ -21,28 +20,17 @@ export function ShinyButton({
   "aria-label": ariaLabel,
 }: ShinyButtonProps) {
   return (
-    <motion.button
+    <button
       type={type}
       onClick={onClick}
       disabled={disabled}
       aria-label={ariaLabel}
-      whileHover={!disabled ? { scale: 1.05 } : {}}
-      whileTap={!disabled ? { scale: 0.95 } : {}}
-      className={`relative overflow-hidden group ${className}`}
+      className={`shiny-button relative overflow-hidden group ${className}`}
     >
       <span className="relative z-10">{children}</span>
       {!disabled && (
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-          initial={{ x: "-100%" }}
-          animate={{ x: "200%" }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
+        <div className="shiny-button-shine" />
       )}
-    </motion.button>
+    </button>
   );
 }

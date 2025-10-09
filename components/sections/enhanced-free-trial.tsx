@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { ArrowRight, CheckCircle2, AlertCircle } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const popularTickers = ["AAPL", "MSFT", "GOOGL", "TSLA", "NVDA", "AMZN"];
 
@@ -75,28 +74,16 @@ export function EnhancedFreeTrialForm() {
             } rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 transition-all disabled:opacity-50`}
             maxLength={5}
           />
-          <AnimatePresence>
-            {success && (
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                exit={{ scale: 0 }}
-                className="absolute right-3 top-1/2 -translate-y-1/2"
-              >
-                <CheckCircle2 className="h-5 w-5 text-emerald-400" />
-              </motion.div>
-            )}
-            {error && (
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                exit={{ scale: 0 }}
-                className="absolute right-3 top-1/2 -translate-y-1/2"
-              >
-                <AlertCircle className="h-5 w-5 text-red-400" />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {success && (
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 icon-animate-enter">
+              <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+            </div>
+          )}
+          {error && (
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 icon-animate-enter">
+              <AlertCircle className="h-5 w-5 text-red-400" />
+            </div>
+          )}
         </div>
         <ShinyButton
           type="submit"
@@ -122,18 +109,11 @@ export function EnhancedFreeTrialForm() {
         </ShinyButton>
       </form>
 
-      <AnimatePresence>
-        {error && (
-          <motion.p
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="text-red-400 text-sm mt-2"
-          >
-            {error}
-          </motion.p>
-        )}
-      </AnimatePresence>
+      {error && (
+        <p className="text-red-400 text-sm mt-2 error-message-enter">
+          {error}
+        </p>
+      )}
 
       <div className="mt-4 flex flex-wrap gap-2 justify-center">
         <span className="text-xs text-slate-500">Try popular stocks:</span>

@@ -1,9 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { auth } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import { logger } from "@/lib/logger";
 import { securityLogger } from "@/lib/security-logger";
+import { RateLimiter, RateLimitPresets, getIdentifier, addRateLimitHeaders } from "@/lib/rate-limit";
 import Stripe from "stripe";
 
 const priceIds = {
@@ -12,8 +13,42 @@ const priceIds = {
   enterprise: process.env.STRIPE_ENTERPRISE_PRICE_ID!,
 };
 
-export async function POST(request: Request) {
+// Rate limiter for checkout endpoint
+const rateLimiter = new RateLimiter(RateLimitPresets.CHECKOUT);
+
+export async function POST(request: NextRequest) {
   try {
+    // Get user ID early for rate limiting
+    const { userId } = await auth();
+
+    if (!userId) {
+      securityLogger.unauthorizedAccess('/api/stripe/checkout', undefined, {
+        endpoint: '/api/stripe/checkout',
+      });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Apply rate limiting (5 requests per hour per user)
+    const identifier = getIdentifier(request, userId);
+    const rateLimitResult = await rateLimiter.check(identifier);
+
+    if (!rateLimitResult.allowed) {
+      const headers = new Headers();
+      addRateLimitHeaders(headers, rateLimitResult);
+
+      return NextResponse.json(
+        {
+          error: 'Rate limit exceeded',
+          message: `Too many checkout attempts. Please try again in ${rateLimitResult.resetIn} seconds.`,
+          retryAfter: rateLimitResult.resetIn,
+        },
+        {
+          status: 429,
+          headers,
+        }
+      );
+    }
+
     // Validate Content-Type
     const contentType = request.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
@@ -28,16 +63,6 @@ export async function POST(request: Request) {
     if (!plan || !priceIds[plan as keyof typeof priceIds]) {
       logger.warn('Invalid plan requested', { plan });
       return NextResponse.json({ error: "Invalid plan" }, { status: 400 });
-    }
-
-    // Use Clerk for authentication (standardized auth system)
-    const { userId } = await auth();
-
-    if (!userId) {
-      securityLogger.unauthorizedAccess('/api/stripe/checkout', undefined, {
-        endpoint: '/api/stripe/checkout',
-      });
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const supabase = await createClient();
@@ -113,7 +138,14 @@ export async function POST(request: Request) {
       sessionId: session.id,
     });
 
-    return NextResponse.json({ sessionId: session.id, url: session.url });
+    // Add rate limit headers to successful response
+    const responseHeaders = new Headers();
+    addRateLimitHeaders(responseHeaders, rateLimitResult);
+
+    return NextResponse.json(
+      { sessionId: session.id, url: session.url },
+      { headers: responseHeaders }
+    );
   } catch (error) {
     logger.error("Failed to create Stripe checkout session", error as Error);
     return NextResponse.json(

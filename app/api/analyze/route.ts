@@ -2,12 +2,41 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { logger } from '@/lib/logger';
 import { securityLogger } from '@/lib/security-logger';
+import { RateLimiter, RateLimitPresets, getIdentifier, addRateLimitHeaders } from '@/lib/rate-limit';
 
 // Ticker validation regex: 1-5 uppercase letters only
 const TICKER_REGEX = /^[A-Z]{1,5}$/;
 
+// Rate limiter for analysis endpoint
+const rateLimiter = new RateLimiter(RateLimitPresets.ANALYZE);
+
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
+    // Get user ID early for rate limiting
+    const { auth } = await import('@clerk/nextjs/server');
+    const { userId } = await auth();
+
+    // Apply rate limiting (10 requests per hour per user/IP)
+    const identifier = getIdentifier(request, userId);
+    const rateLimitResult = await rateLimiter.check(identifier);
+
+    if (!rateLimitResult.allowed) {
+      const headers = new Headers();
+      addRateLimitHeaders(headers, rateLimitResult);
+
+      return NextResponse.json(
+        {
+          error: 'Rate limit exceeded',
+          message: `Too many analysis requests. Please try again in ${rateLimitResult.resetIn} seconds.`,
+          retryAfter: rateLimitResult.resetIn,
+        },
+        {
+          status: 429,
+          headers,
+        }
+      );
+    }
+
     // Validate Content-Type
     const contentType = request.headers.get('content-type');
     if (!contentType || !contentType.includes('application/json')) {
@@ -37,10 +66,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         { status: 400 }
       );
     }
-
-    // Use Clerk for authentication
-    const { auth } = await import('@clerk/nextjs/server');
-    const { userId } = await auth();
 
     const supabase = await createClient();
 
@@ -100,10 +125,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       analysisType: userId ? 'basic' : 'free',
     });
 
-    return NextResponse.json({
-      success: true,
-      data: analysis,
-    });
+    // Add rate limit headers to successful response
+    const responseHeaders = new Headers();
+    addRateLimitHeaders(responseHeaders, rateLimitResult);
+
+    return NextResponse.json(
+      {
+        success: true,
+        data: analysis,
+      },
+      {
+        headers: responseHeaders,
+      }
+    );
   } catch (error) {
     logger.error('Stock analysis failed', error as Error, {
       ticker: await request.json().then(j => j.ticker).catch(() => null),

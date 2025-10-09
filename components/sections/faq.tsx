@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { GradientText } from "@/components/ui/gradient-text";
 import { ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { FadeIn } from "@/components/ui/fade-in";
 
 const faqs = [
@@ -68,27 +67,19 @@ export function FAQ() {
                   <span className="text-white font-semibold text-sm md:text-base pr-4">
                     {faq.question}
                   </span>
-                  <motion.div
-                    animate={{ rotate: openIndex === faq.id ? 180 : 0 }}
-                    transition={{ duration: 0.2 }}
+                  <div
+                    className={openIndex === faq.id ? "faq-chevron-open" : "faq-chevron-closed"}
                   >
                     <ChevronDown className="h-5 w-5 text-slate-400 flex-shrink-0" />
-                  </motion.div>
+                  </div>
                 </button>
-                <AnimatePresence>
-                  {openIndex === faq.id && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <div className="px-6 pb-4 text-slate-400 text-sm md:text-base">
-                        {faq.answer}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {openIndex === faq.id && (
+                  <div className="faq-content-open">
+                    <div className="px-6 pb-4 text-slate-400 text-sm md:text-base">
+                      {faq.answer}
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>

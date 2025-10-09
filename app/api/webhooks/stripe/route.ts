@@ -5,8 +5,38 @@ import { supabaseAdmin } from '@/lib/supabase/admin';
 import Stripe from 'stripe';
 import { logger } from '@/lib/logger';
 import { securityLogger } from '@/lib/security-logger';
+import { RateLimiter, RateLimitPresets, getIdentifier, addRateLimitHeaders } from '@/lib/rate-limit';
+
+// Rate limiter for webhook endpoint
+const rateLimiter = new RateLimiter(RateLimitPresets.WEBHOOK);
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  // Apply rate limiting (100 requests per minute per IP)
+  const identifier = getIdentifier(request, null);
+  const rateLimitResult = await rateLimiter.check(identifier);
+
+  if (!rateLimitResult.allowed) {
+    const headers = new Headers();
+    addRateLimitHeaders(headers, rateLimitResult);
+
+    securityLogger.suspiciousActivity('Stripe webhook rate limit exceeded', {
+      severity: 'high',
+      ipAddress: identifier,
+      endpoint: '/api/webhooks/stripe',
+    });
+
+    return NextResponse.json(
+      {
+        error: 'Rate limit exceeded',
+        retryAfter: rateLimitResult.resetIn,
+      },
+      {
+        status: 429,
+        headers,
+      }
+    );
+  }
+
   const body = await request.text();
   const headersList = await headers();
   const signature = headersList.get('stripe-signature');
