@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { logger } from '@/lib/logger';
+import { securityLogger } from '@/lib/security-logger';
 
 // Ticker validation regex: 1-5 uppercase letters only
 const TICKER_REGEX = /^[A-Z]{1,5}$/;
@@ -18,6 +20,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const { ticker } = await request.json();
 
     if (!ticker || typeof ticker !== 'string') {
+      logger.warn('Invalid ticker in analysis request', { ticker });
       return NextResponse.json(
         { error: 'Valid stock ticker is required' },
         { status: 400 }
@@ -28,6 +31,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const sanitizedTicker = ticker.trim().toUpperCase().substring(0, 5);
 
     if (!TICKER_REGEX.test(sanitizedTicker)) {
+      logger.warn('Invalid ticker format', { ticker, sanitizedTicker });
       return NextResponse.json(
         { error: 'Invalid ticker format. Must be 1-5 uppercase letters.' },
         { status: 400 }
@@ -57,6 +61,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
           .single();
 
         if (usage && usage.analyses_limit !== -1 && usage.analyses_used >= usage.analyses_limit) {
+          securityLogger.rateLimitExceeded(userId, '/api/analyze', {
+            analysesUsed: usage.analyses_used,
+            analysesLimit: usage.analyses_limit,
+          });
           return NextResponse.json(
             { error: 'Analysis limit reached for your plan' },
             { status: 429 }
@@ -67,7 +75,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     // TODO: Connect to Octagon MCP for actual stock data
     // For now, we'll return a mock response
+    const endTimer = logger.time('stock-analysis');
     const analysis = await analyzeStock(sanitizedTicker);
+    endTimer();
 
     // Store the analysis
     await supabase.from('stock_analyses').insert({
@@ -84,12 +94,20 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       await supabase.rpc('increment_usage', { p_user_id: userId });
     }
 
+    logger.info('Stock analysis completed', {
+      userId: userId || undefined,
+      ticker: sanitizedTicker,
+      analysisType: userId ? 'basic' : 'free',
+    });
+
     return NextResponse.json({
       success: true,
       data: analysis,
     });
   } catch (error) {
-    console.error('Analysis error:', error);
+    logger.error('Stock analysis failed', error as Error, {
+      ticker: await request.json().then(j => j.ticker).catch(() => null),
+    });
     return NextResponse.json(
       { error: 'Failed to analyze stock' },
       { status: 500 }

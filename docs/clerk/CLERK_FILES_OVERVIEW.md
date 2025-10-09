@@ -59,13 +59,6 @@ vortis/
 ├── CLERK_INSTALLATION.md                   ✨ NEW - Installation steps
 ├── CLERK_FILES_OVERVIEW.md                 ✨ NEW - This file
 └── COMMIT_MESSAGE.txt                      ✨ NEW - Git commit message
-
-Legend:
-  ✏️ = Modified file
-  ✨ = New file
-  ✓ = Unchanged (still used)
-  ❌ = Deprecated (can be deleted)
-  ⚠️ = Entire directory deprecated
 ```
 
 ## File Categories
@@ -108,7 +101,6 @@ Legend:
 ```
 
 ### New Webhook System
-
 ```
 /app/api/webhooks/clerk/route.ts
   Purpose: Sync Clerk user events to Supabase
@@ -122,7 +114,6 @@ Legend:
 ```
 
 ### Database Changes
-
 ```
 /supabase/migrations/20250109_clerk_migration.sql
   Changes:
@@ -140,7 +131,6 @@ Legend:
 ```
 
 ### Documentation Files
-
 ```
 /docs/CLERK_SETUP.md                    # Step-by-step setup (detailed)
 /docs/CLERK_MIGRATION_COMPLETE.md       # Technical migration notes
@@ -226,7 +216,7 @@ STRIPE_SECRET_KEY=...
     "@clerk/nextjs": "^6.33.3",      // ✨ NEW
     "svix": "^1.76.1",                // ✨ NEW
     "@supabase/ssr": "^0.7.0",        // ✓ KEPT
-    "@supabase/supabase-js": "^2.58.0", // ✓ KEPT
+    "@supabase/supabase-js": "^2.58.0" // ✓ KEPT
     // ... other deps
   }
 }
@@ -317,3 +307,5 @@ Refer to the documentation files listed above. Each covers different aspects:
 - **Environment vars?** → docs/ENVIRONMENT_VARIABLES.md
 - **Testing?** → docs/TESTING_CHECKLIST.md
 - **Technical details?** → docs/CLERK_MIGRATION_COMPLETE.md
+
+

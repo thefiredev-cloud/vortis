@@ -6,7 +6,7 @@
  * Run with: npm test tests/clerk/auth.test.ts
  */
 
-import { describe, it, expect, beforeEach } from '@jest/globals';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 describe('Clerk Authentication', () => {
   describe('Sign-Up Flow', () => {

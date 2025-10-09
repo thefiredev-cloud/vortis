@@ -148,3 +148,196 @@ button, a {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* CSS-based animation replacements for Framer Motion */
+
+/* AnimatedCard animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animated-card {
+  animation: fadeInUp 0.5s ease-out forwards;
+  opacity: 0;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.animated-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.1);
+}
+
+/* FadeIn animations with direction support */
+@keyframes fadeInUpDir {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDownDir {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeftDir {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRightDir {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInNone {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.21, 0.47, 0.32, 0.98);
+  opacity: 0;
+}
+
+.fade-in-up {
+  animation-name: fadeInUpDir;
+}
+
+.fade-in-down {
+  animation-name: fadeInDownDir;
+}
+
+.fade-in-left {
+  animation-name: fadeInLeftDir;
+}
+
+.fade-in-right {
+  animation-name: fadeInRightDir;
+}
+
+.fade-in-none {
+  animation-name: fadeInNone;
+}
+
+/* ShinyButton animations */
+@keyframes shine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(200%);
+  }
+}
+
+.shiny-button {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease-out;
+}
+
+.shiny-button:not(:disabled):hover {
+  transform: scale(1.05);
+}
+
+.shiny-button:not(:disabled):active {
+  transform: scale(0.95);
+}
+
+.shiny-button-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: shine 2s linear infinite;
+  pointer-events: none;
+}
+
+/* Icon check/error animations */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.icon-animate {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+/* Intersection Observer animations */
+@keyframes observerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.observer-animate {
+  animation: observerFadeIn 0.6s ease-out forwards;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .animated-card,
+  .fade-in,
+  .shiny-button,
+  .icon-animate,
+  .observer-animate {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .animated-card:hover,
+  .shiny-button:hover {
+    transform: none !important;
+  }
+}

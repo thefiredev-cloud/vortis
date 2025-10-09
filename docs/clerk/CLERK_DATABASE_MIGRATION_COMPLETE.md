@@ -473,7 +473,7 @@ SELECT * FROM profiles WHERE id = 'user_2abc123';
 **Metrics:**
 - Webhook success rate (should be ~100%)
 - User creation time (should be <500ms)
-- Database query times (should be <100ms)
+-- Database query times (should be <100ms)
 - Error rates (should be <0.1%)
 
 ## Next Steps
@@ -554,3 +554,5 @@ Migration is successful when:
 - Development: 1-2 hours
 - Testing: 4-8 hours
 - Production: 30 minutes (migration) + 24-48 hours (monitoring)
+
+

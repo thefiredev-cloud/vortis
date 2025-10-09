@@ -2,6 +2,9 @@ import { createClient } from "@/lib/supabase/server";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
+import { logger } from "@/lib/logger";
+import { securityLogger } from "@/lib/security-logger";
+import Stripe from "stripe";
 
 const priceIds = {
   starter: process.env.STRIPE_STARTER_PRICE_ID!,
@@ -23,6 +26,7 @@ export async function POST(request: Request) {
     const { plan } = await request.json();
 
     if (!plan || !priceIds[plan as keyof typeof priceIds]) {
+      logger.warn('Invalid plan requested', { plan });
       return NextResponse.json({ error: "Invalid plan" }, { status: 400 });
     }
 
@@ -30,6 +34,9 @@ export async function POST(request: Request) {
     const { userId } = await auth();
 
     if (!userId) {
+      securityLogger.unauthorizedAccess('/api/stripe/checkout', undefined, {
+        endpoint: '/api/stripe/checkout',
+      });
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -44,13 +51,17 @@ export async function POST(request: Request) {
 
     // Don't allow creating checkout if already has active subscription
     if (existingSubscription?.status === "active" || existingSubscription?.status === "trialing") {
+      logger.warn('Attempted checkout with existing active subscription', {
+        userId,
+        existingStatus: existingSubscription.status,
+      });
       return NextResponse.json(
         { error: "You already have an active subscription" },
         { status: 400 }
       );
     }
 
-    let customerId = existingSubscription?.stripe_customer_id;
+    const customerId = existingSubscription?.stripe_customer_id;
 
     // Create checkout session with improved configuration
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
@@ -91,9 +102,20 @@ export async function POST(request: Request) {
 
     const session = await stripe.checkout.sessions.create(sessionConfig);
 
+    securityLogger.paymentEvent('checkout_started', userId, {
+      planName: plan,
+      sessionId: session.id,
+    });
+
+    logger.info('Stripe checkout session created', {
+      userId,
+      plan,
+      sessionId: session.id,
+    });
+
     return NextResponse.json({ sessionId: session.id, url: session.url });
   } catch (error) {
-    console.error("Stripe checkout error:", error);
+    logger.error("Failed to create Stripe checkout session", error as Error);
     return NextResponse.json(
       { error: "Failed to create checkout session" },
       { status: 500 }

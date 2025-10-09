@@ -6,7 +6,7 @@
  * Run with: npm test tests/clerk/integration.test.ts
  */
 
-import { describe, it, expect, beforeAll, afterAll } from '@jest/globals';
+import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 
 describe('Clerk Integration', () => {
   describe('New User Journey', () => {

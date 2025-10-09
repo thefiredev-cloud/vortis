@@ -74,3 +74,5 @@ After completing these steps, the migration scripts will handle:
 - Replacing auth pages with Clerk components
 - Updating middleware for Clerk authentication
 - Setting up Clerk → Supabase sync webhook
+
+

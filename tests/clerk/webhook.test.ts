@@ -6,7 +6,7 @@
  * Run with: npm test tests/clerk/webhook.test.ts
  */
 
-import { describe, it, expect, beforeEach } from '@jest/globals';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { Webhook } from 'svix';
 
 describe('Clerk Webhooks', () => {

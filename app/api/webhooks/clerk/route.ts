@@ -2,6 +2,8 @@ import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
 import { Webhook } from 'svix';
 import { supabaseAdmin } from '@/lib/supabase/admin';
+import { logger } from '@/lib/logger';
+import { securityLogger } from '@/lib/security-logger';
 
 /**
  * Clerk Webhook Handler
@@ -30,7 +32,9 @@ export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
-    console.error('Missing CLERK_WEBHOOK_SECRET environment variable');
+    securityLogger.configurationError('CLERK_WEBHOOK_SECRET', 'Environment variable not set', {
+      endpoint: '/api/webhooks/clerk',
+    });
     return Response.json(
       { error: 'Webhook secret not configured' },
       { status: 500 }
@@ -45,6 +49,9 @@ export async function POST(req: Request) {
 
   // Verify required headers are present
   if (!svix_id || !svix_timestamp || !svix_signature) {
+    securityLogger.webhookVerificationFailed('clerk', 'Missing svix headers', {
+      endpoint: '/api/webhooks/clerk',
+    });
     return Response.json(
       { error: 'Missing svix headers' },
       { status: 400 }
@@ -65,7 +72,10 @@ export async function POST(req: Request) {
       'svix-signature': svix_signature,
     }) as WebhookEvent;
   } catch (err) {
-    console.error('Webhook verification failed:', err);
+    securityLogger.webhookVerificationFailed('clerk', 'Invalid signature', {
+      endpoint: '/api/webhooks/clerk',
+    });
+    logger.error('Clerk webhook signature verification failed', err as Error);
     return Response.json(
       { error: 'Invalid webhook signature' },
       { status: 400 }
@@ -74,7 +84,10 @@ export async function POST(req: Request) {
 
   // Handle different event types
   const eventType = evt.type;
-  console.log(`Received Clerk webhook: ${eventType}`);
+  logger.info(`Received Clerk webhook: ${eventType}`, {
+    eventType,
+    eventId: svix_id,
+  });
 
   try {
     // Handle user.created and user.updated
@@ -106,14 +119,25 @@ export async function POST(req: Request) {
       });
 
       if (error) {
-        console.error(`Error upserting user ${id}:`, error);
+        logger.error(`Failed to upsert user from Clerk webhook`, error as Error, {
+          userId: id,
+          eventType,
+        });
         return Response.json(
           { error: 'Error upserting user' },
           { status: 500 }
         );
       }
 
-      console.log(`Successfully ${eventType === 'user.created' ? 'created' : 'updated'} user: ${id}`);
+      logger.info(`Successfully ${eventType === 'user.created' ? 'created' : 'updated'} user from Clerk`, {
+        userId: id,
+        eventType,
+      });
+
+      securityLogger.webhookProcessed('clerk', eventType, {
+        userId: id,
+      });
+
       return Response.json({ success: true });
     }
 
@@ -122,7 +146,9 @@ export async function POST(req: Request) {
       const { id } = evt.data;
 
       if (!id) {
-        console.error('Missing user ID in deletion event');
+        logger.error('Missing user ID in Clerk deletion event', undefined, {
+          eventType,
+        });
         return Response.json(
           { error: 'Missing user ID' },
           { status: 400 }
@@ -135,22 +161,37 @@ export async function POST(req: Request) {
       });
 
       if (error) {
-        console.error(`Error deleting user ${id}:`, error);
+        logger.error(`Failed to delete user from Clerk webhook`, error as Error, {
+          userId: id,
+          eventType,
+        });
         return Response.json(
           { error: 'Error deleting user' },
           { status: 500 }
         );
       }
 
-      console.log(`Successfully deleted user: ${id}`);
+      logger.info(`Successfully deleted user from Clerk`, {
+        userId: id,
+        eventType,
+      });
+
+      securityLogger.webhookProcessed('clerk', eventType, {
+        userId: id,
+      });
+
       return Response.json({ success: true });
     }
 
     // Unknown event type
-    console.warn(`Unhandled webhook event type: ${eventType}`);
+    logger.debug(`Unhandled Clerk webhook event type: ${eventType}`, {
+      eventType,
+    });
     return Response.json({ success: true, message: 'Event type not handled' });
   } catch (error) {
-    console.error('Error processing webhook:', error);
+    logger.error('Error processing Clerk webhook', error as Error, {
+      eventType,
+    });
     return Response.json(
       { error: 'Internal server error' },
       { status: 500 }
