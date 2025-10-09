@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { AuthLayout } from "@/components/auth/auth-layout";
 import { AuthError } from "@/components/auth/auth-error";
+
+export const dynamic = 'force-dynamic';
 
 /**
  * Authentication Error Page
@@ -11,7 +13,8 @@ import { AuthError } from "@/components/auth/auth-error";
  * Displays user-friendly error messages when OAuth fails.
  * Provides retry and navigation options.
  */
-export default function AuthErrorPage() {
+
+function ErrorContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -44,5 +47,17 @@ export default function AuthErrorPage() {
         showLoginLink={true}
       />
     </AuthLayout>
+  );
+}
+
+export default function AuthErrorPage() {
+  return (
+    <Suspense fallback={
+      <AuthLayout showBackLink={false}>
+        <div className="text-center text-slate-400">Loading...</div>
+      </AuthLayout>
+    }>
+      <ErrorContent />
+    </Suspense>
   );
 }

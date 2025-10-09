@@ -1,4 +1,5 @@
 import { FileText, Mic, LineChart, Building2, Rocket, Search } from "lucide-react";
+export const dynamic = 'force-dynamic';
 import { OrbBackground } from "@/components/ui/orb-background";
 import { AnimatedCard } from "@/components/ui/animated-card";
 import { StatBar } from "@/components/ui/stat-bar";

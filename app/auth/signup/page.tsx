@@ -1,6 +1,8 @@
 import { SignUp } from '@clerk/nextjs';
 import { OrbBackground } from '@/components/ui/orb-background';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * Sign Up Page - Clerk Authentication
  *

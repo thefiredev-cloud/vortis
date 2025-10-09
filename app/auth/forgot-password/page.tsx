@@ -6,6 +6,8 @@ import Link from "next/link";
 import { AuthLayout } from "@/components/auth/auth-layout";
 import { AlertCircle } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
+
 /**
  * Forgot Password Page - Redirect to Login
  *

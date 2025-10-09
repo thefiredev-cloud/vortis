@@ -10,6 +10,8 @@ import {
 } from "@/components/auth";
 import { OrbBackground } from "@/components/ui/orb-background";
 
+export const dynamic = 'force-dynamic';
+
 /**
  * Auth Components Demo Page
  *

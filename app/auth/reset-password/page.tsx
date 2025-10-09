@@ -7,6 +7,8 @@ import { createClient } from "@/lib/supabase/client";
 import { OrbBackground } from "@/components/ui/orb-background";
 import { ArrowRight, Lock, Loader2 } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
+
 export default function ResetPasswordPage() {
   const router = useRouter();
   const [password, setPassword] = useState("");

@@ -1,6 +1,7 @@
 import { User } from '@clerk/nextjs/server';
 
 export function createMockUser(overrides?: Partial<User>): User {
+  // Use 'unknown' intermediate cast to work around private _raw property
   return {
     id: 'user_123',
     firstName: 'Test',
@@ -43,5 +44,5 @@ export function createMockUser(overrides?: Partial<User>): User {
     primaryWeb3Wallet: null,
     externalAccounts: [],
     ...overrides,
-  } as User;
+  } as unknown as User;
 }

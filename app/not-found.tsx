@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Home, ArrowLeft, Search, TrendingUp } from "lucide-react";
 import { OrbBackground } from "@/components/ui/orb-background";
