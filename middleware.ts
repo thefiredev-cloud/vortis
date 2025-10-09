@@ -1,89 +1,28 @@
-import { createServerClient } from "@supabase/ssr";
-import { NextResponse, type NextRequest } from "next/server";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  });
+// Public routes that don't require authentication
+const isPublicRoute = createRouteMatcher([
+  '/',
+  '/pricing',
+  '/auth/login',
+  '/auth/signup',
+  '/sign-in(.*)',
+  '/sign-up(.*)',
+  '/api/stripe/webhook',
+  '/api/webhooks(.*)',
+])
 
-  // Protected routes that require authentication
-  const protectedPaths = ["/dashboard"];
-  const isProtectedPath = protectedPaths.some((path) =>
-    request.nextUrl.pathname.startsWith(path)
-  );
-
-  // Auth routes that should redirect to dashboard if logged in
-  const authPaths = ["/auth/login", "/auth/signup"];
-  const isAuthPath = authPaths.some((path) =>
-    request.nextUrl.pathname.startsWith(path)
-  );
-
-  // Only check Supabase auth if we're on a protected or auth route
-  if (!isProtectedPath && !isAuthPath) {
-    return response;
+export default clerkMiddleware(async (auth, request) => {
+  if (!isPublicRoute(request)) {
+    await auth.protect()
   }
-
-  // Validate environment variables before creating Supabase client
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL ||
-      !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-      process.env.NEXT_PUBLIC_SUPABASE_URL === 'your_supabase_url' ||
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY === 'your_supabase_anon_key') {
-    console.warn('Supabase credentials not configured - skipping auth check');
-    return response;
-  }
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            request.cookies.set(name, value)
-          );
-          response = NextResponse.next({
-            request,
-          });
-          cookiesToSet.forEach(({ name, value, options }) =>
-            response.cookies.set(name, value, options)
-          );
-        },
-      },
-    }
-  );
-
-  // Refresh session if expired
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  // Redirect to login if accessing protected route without auth
-  if (isProtectedPath && !user) {
-    return NextResponse.redirect(new URL("/auth/login", request.url));
-  }
-
-  // Redirect to dashboard if accessing auth pages while logged in
-  if (isAuthPath && user) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
-
-  return response;
-}
+})
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public files (images, etc.)
-     */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
   ],
-};
+}

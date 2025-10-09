@@ -8,6 +8,8 @@ import { ShinyButton } from "@/components/ui/shiny-button";
 import { FeatureComparison } from "@/components/sections/feature-comparison";
 import { TrustBadges } from "@/components/sections/trust-badges";
 import { FAQ } from "@/components/sections/faq";
+import { CheckoutButton } from "@/components/pricing/checkout-button";
+import { PRICING_PLANS } from "@/lib/stripe";
 
 export default function PricingPage() {
   return (
@@ -90,9 +92,13 @@ export default function PricingPage() {
                   <span className="text-slate-300">Access to 8,000+ public companies</span>
                 </li>
               </ul>
-              <button className="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition-all hover:scale-105">
+              <CheckoutButton
+                planName="starter"
+                priceId={PRICING_PLANS.starter.priceId}
+                className="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
                 Get Started
-              </button>
+              </CheckoutButton>
               </div>
             </AnimatedCard>
 
@@ -142,9 +148,13 @@ export default function PricingPage() {
                   <span className="text-slate-300">Priority support (24/7)</span>
                 </li>
               </ul>
-              <ShinyButton className="w-full py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold rounded-lg">
+              <CheckoutButton
+                planName="pro"
+                priceId={PRICING_PLANS.pro.priceId}
+                className="w-full py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-semibold rounded-lg transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
                 Get Started
-              </ShinyButton>
+              </CheckoutButton>
               </div>
             </AnimatedCard>
 
@@ -191,9 +201,13 @@ export default function PricingPage() {
                   <span className="text-slate-300">White-label options available</span>
                 </li>
               </ul>
-              <button className="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-lg transition-all hover:scale-105">
-                Contact Sales
-              </button>
+              <CheckoutButton
+                planName="enterprise"
+                priceId={PRICING_PLANS.enterprise.priceId}
+                className="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-lg transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
+                Get Started
+              </CheckoutButton>
               </div>
             </AnimatedCard>
           </div>

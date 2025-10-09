@@ -47,7 +47,7 @@ export function PriceChart({ data, showMovingAverages = true }: PriceChartProps)
             }}
             labelStyle={{ color: "#e2e8f0", fontWeight: "600", marginBottom: "8px" }}
             itemStyle={{ color: "#94a3b8", fontSize: "13px" }}
-            formatter={(value: any) => [`$${value.toFixed(2)}`, "Price"]}
+            formatter={(value: number | string) => [`$${typeof value === "number" ? value.toFixed(2) : value}`, "Price"]}
           />
           <Area
             type="monotone"

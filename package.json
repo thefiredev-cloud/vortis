@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint",
+    "clerk:dev": "npx @clerk/cli dev",
+    "clerk:sync": "npx @clerk/cli users sync"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.33.3",
     "@stripe/stripe-js": "^8.0.0",
-    "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.58.0",
     "class-variance-authority": "^0.7.1",
@@ -24,6 +26,7 @@
     "recharts": "^3.2.1",
     "sonner": "^2.0.7",
     "stripe": "^19.0.0",
+    "svix": "^1.76.1",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {

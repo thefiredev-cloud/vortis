@@ -1,0 +1,97 @@
+feat(auth): Migrate from Supabase Auth to Clerk
+
+Complete migration from Supabase authentication to Clerk for improved
+authentication UX, better session management, and more OAuth providers.
+
+## Changes
+
+### Authentication System
+- Replace Supabase Auth with Clerk for all authentication
+- Implement Google OAuth via Clerk (cleaner UI)
+- Add webhook-based user sync to Supabase database
+- Keep Supabase as database-only (not auth)
+
+### Modified Files
+- app/layout.tsx: Add ClerkProvider with dark theme
+- middleware.ts: Replace Supabase auth with clerkMiddleware
+- app/dashboard/layout.tsx: Use Clerk auth() instead of Supabase
+- components/dashboard/dashboard-nav.tsx: Use Clerk UserButton
+- app/auth/login/page.tsx: Replace with Clerk SignIn component
+- app/auth/signup/page.tsx: Replace with Clerk SignUp component
+- .env.local: Add Clerk environment variables
+
+### New Files
+- app/api/webhooks/clerk/route.ts: Sync Clerk events to Supabase
+- supabase/migrations/20250109_clerk_migration.sql: Update schema for Clerk IDs
+- supabase/migrations/20250109_clerk_database_functions.sql: Add upsert/delete functions
+- lib/supabase/admin.ts: Admin client for webhooks (already existed)
+- docs/CLERK_SETUP.md: Complete setup guide
+- docs/CLERK_MIGRATION_COMPLETE.md: Migration details and testing
+- docs/TESTING_CHECKLIST.md: 25-point test plan
+- docs/ENVIRONMENT_VARIABLES.md: All env vars documented
+- MIGRATION_SUMMARY.md: Quick reference guide
+- README_CLERK_MIGRATION.md: Comprehensive migration README
+- CLERK_INSTALLATION.md: Installation instructions
+
+### Database Changes
+- profiles.id: Changed from UUID to TEXT for Clerk user IDs
+- Removed Supabase auth triggers
+- Updated RLS policies for service role access
+- Added database functions for webhook operations
+- Updated foreign keys in subscriptions table
+
+### Dependencies
+- Added: @clerk/nextjs ^6.33.3
+- Added: svix ^1.76.1
+
+## Setup Required
+
+After pulling this commit, you must:
+
+1. Create Clerk account at https://clerk.com
+2. Enable Google OAuth in Clerk Dashboard
+3. Add environment variables to .env.local:
+   - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+   - CLERK_SECRET_KEY
+   - CLERK_WEBHOOK_SECRET
+   - SUPABASE_SERVICE_ROLE_KEY
+4. Apply database migrations in Supabase
+5. Configure webhook in Clerk Dashboard
+6. Test authentication flow
+
+See README_CLERK_MIGRATION.md or MIGRATION_SUMMARY.md for detailed instructions.
+
+## Breaking Changes
+
+- Old Supabase auth sessions will be invalidated
+- Users must re-authenticate via Google OAuth
+- User IDs changed from UUID to Clerk format (user_xxxxx)
+- Auth callback routes removed (Clerk handles this)
+
+## Testing
+
+Run complete test suite from docs/TESTING_CHECKLIST.md:
+- Authentication flows
+- Webhook synchronization
+- Protected route access
+- User interface components
+- Cross-browser compatibility
+
+## Documentation
+
+All documentation in:
+- /docs/CLERK_SETUP.md - Setup guide
+- /docs/CLERK_MIGRATION_COMPLETE.md - Migration details
+- /docs/TESTING_CHECKLIST.md - Test plan
+- /docs/ENVIRONMENT_VARIABLES.md - Env var reference
+- /MIGRATION_SUMMARY.md - Quick reference
+- /README_CLERK_MIGRATION.md - Comprehensive guide
+
+## Rollback
+
+If issues occur, see rollback plan in docs/CLERK_MIGRATION_COMPLETE.md
+
+## Related Issues
+
+Closes: [Add your issue number if applicable]
+Refs: Supabase Auth → Clerk migration initiative

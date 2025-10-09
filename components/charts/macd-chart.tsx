@@ -39,7 +39,7 @@ export function MACDChart({ data }: MACDChartProps) {
             }}
             labelStyle={{ color: "#e2e8f0", fontWeight: "600", marginBottom: "8px" }}
             itemStyle={{ fontSize: "12px" }}
-            formatter={(value: any, name: string) => {
+            formatter={(value: number | string, name: string) => {
               const formatted = typeof value === "number" ? value.toFixed(3) : value;
               const label = name === "macd" ? "MACD" : name === "signal" ? "Signal" : "Histogram";
               return [formatted, label];

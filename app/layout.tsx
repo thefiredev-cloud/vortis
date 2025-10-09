@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ClerkProvider } from '@clerk/nextjs';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -61,18 +62,43 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Vortis" />
-        <link rel="apple-touch-icon" href="/icon.png" />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider
+      appearance={{
+        baseTheme: undefined,
+        variables: {
+          colorPrimary: '#10b981', // Emerald-500
+          colorBackground: '#000000',
+          colorInputBackground: 'rgba(255, 255, 255, 0.05)',
+          colorInputText: '#ffffff',
+          colorText: '#ffffff',
+          colorTextSecondary: '#94a3b8',
+          borderRadius: '0.5rem',
+        },
+        elements: {
+          formButtonPrimary:
+            'bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600',
+          card: 'bg-black/50 backdrop-blur-xl border border-white/10',
+          headerTitle: 'text-white',
+          headerSubtitle: 'text-slate-400',
+          socialButtonsBlockButton:
+            'bg-white/10 backdrop-blur-xl border-white/20 text-white hover:bg-white/20',
+          footerActionLink: 'text-emerald-400 hover:text-emerald-300',
+        },
+      }}
+    >
+      <html lang="en">
+        <head>
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+          <meta name="apple-mobile-web-app-title" content="Vortis" />
+          <link rel="apple-touch-icon" href="/icon.png" />
+        </head>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

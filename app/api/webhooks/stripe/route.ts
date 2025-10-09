@@ -1,22 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import { stripe } from '@/lib/stripe';
-import { createClient } from '@supabase/supabase-js';
+import { supabaseAdmin } from '@/lib/supabase/admin';
 import Stripe from 'stripe';
 
-// Create Supabase admin client for webhook handling
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  }
-);
-
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): Promise<NextResponse> {
   const body = await request.text();
   const headersList = await headers();
   const signature = headersList.get('stripe-signature');
@@ -91,27 +79,31 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) {
-  const userId = session.client_reference_id;
+async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session): Promise<void> {
+  // Try both metadata patterns (metadata and client_reference_id)
+  const userId = session.metadata?.user_id || session.client_reference_id;
   const customerId = session.customer as string;
   const subscriptionId = session.subscription as string;
 
   if (!userId) {
-    console.error('No user ID in session');
+    console.error('[STRIPE_WEBHOOK] No user ID in checkout session');
     return;
   }
 
-  // Get subscription details
+  // Get subscription details to get period dates
   const subscription = await stripe.subscriptions.retrieve(subscriptionId);
   const priceId = subscription.items.data[0].price.id;
 
-  // Determine plan name from price ID
-  let planName: 'starter' | 'pro' | 'enterprise' = 'starter';
-  if (priceId === process.env.STRIPE_PRO_PRICE_ID) planName = 'pro';
-  if (priceId === process.env.STRIPE_ENTERPRISE_PRICE_ID) planName = 'enterprise';
+  // Determine plan name from metadata or price ID
+  let planName = session.metadata?.plan_name as 'starter' | 'pro' | 'enterprise' | undefined;
+  if (!planName) {
+    planName = 'starter';
+    if (priceId === process.env.STRIPE_PRO_PRICE_ID) planName = 'pro';
+    if (priceId === process.env.STRIPE_ENTERPRISE_PRICE_ID) planName = 'enterprise';
+  }
 
-  // Create subscription record
-  await supabaseAdmin.from('subscriptions').insert({
+  // Create or update subscription record (upsert to handle duplicates)
+  await supabaseAdmin.from('subscriptions').upsert({
     user_id: userId,
     stripe_customer_id: customerId,
     stripe_subscription_id: subscriptionId,
@@ -123,18 +115,21 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
     cancel_at_period_end: subscription.cancel_at_period_end,
   });
 
-  // Create usage tracking record
+  // Create usage tracking record (insert only if doesn't exist)
   const analysesLimit = planName === 'starter' ? 100 : -1;
   await supabaseAdmin.from('usage_tracking').insert({
     user_id: userId,
     plan_name: planName,
     analyses_used: 0,
     analyses_limit: analysesLimit,
+    period_start: new Date().toISOString(),
+    period_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+  }).select().single().catch(() => {
+    // Ignore if already exists
   });
 }
 
-async function handleSubscriptionUpdate(subscription: Stripe.Subscription) {
-  const customerId = subscription.customer as string;
+async function handleSubscriptionUpdate(subscription: Stripe.Subscription): Promise<void> {
   const priceId = subscription.items.data[0].price.id;
 
   // Determine plan name
@@ -152,44 +147,58 @@ async function handleSubscriptionUpdate(subscription: Stripe.Subscription) {
       current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
       cancel_at_period_end: subscription.cancel_at_period_end,
     })
-    .eq('stripe_customer_id', customerId);
+    .eq('stripe_subscription_id', subscription.id);
 
-  // Update usage tracking
-  const analysesLimit = planName === 'starter' ? 100 : -1;
-  await supabaseAdmin
-    .from('usage_tracking')
-    .update({
-      plan_name: planName,
-      analyses_limit: analysesLimit,
-    })
-    .eq('stripe_customer_id', customerId);
+  // Update usage tracking - find by user_id from subscription
+  const { data: sub } = await supabaseAdmin
+    .from('subscriptions')
+    .select('user_id')
+    .eq('stripe_subscription_id', subscription.id)
+    .single();
+
+  if (sub?.user_id) {
+    const analysesLimit = planName === 'starter' ? 100 : -1;
+    await supabaseAdmin
+      .from('usage_tracking')
+      .update({
+        plan_name: planName,
+        analyses_limit: analysesLimit,
+      })
+      .eq('user_id', sub.user_id);
+  }
 }
 
-async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
-  const customerId = subscription.customer as string;
-
+async function handleSubscriptionDeleted(subscription: Stripe.Subscription): Promise<void> {
   await supabaseAdmin
     .from('subscriptions')
     .update({ status: 'canceled' })
-    .eq('stripe_customer_id', customerId);
+    .eq('stripe_subscription_id', subscription.id);
 }
 
-async function handleInvoicePaid(invoice: Stripe.Invoice) {
-  const customerId = invoice.customer as string;
+async function handleInvoicePaid(invoice: Stripe.Invoice): Promise<void> {
+  const subscriptionId = invoice.subscription as string | null;
 
-  // Update subscription status to active
+  if (!subscriptionId) return;
+
+  // Update subscription status and period dates
   await supabaseAdmin
     .from('subscriptions')
-    .update({ status: 'active' })
-    .eq('stripe_customer_id', customerId);
+    .update({
+      status: 'active',
+      current_period_start: new Date(invoice.period_start * 1000).toISOString(),
+      current_period_end: new Date(invoice.period_end * 1000).toISOString(),
+    })
+    .eq('stripe_subscription_id', subscriptionId);
 }
 
-async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
-  const customerId = invoice.customer as string;
+async function handleInvoicePaymentFailed(invoice: Stripe.Invoice): Promise<void> {
+  const subscriptionId = invoice.subscription as string | null;
+
+  if (!subscriptionId) return;
 
   // Update subscription status
   await supabaseAdmin
     .from('subscriptions')
     .update({ status: 'past_due' })
-    .eq('stripe_customer_id', customerId);
+    .eq('stripe_subscription_id', subscriptionId);
 }
