@@ -98,7 +98,7 @@ Complete documentation for the Vortis authentication and subscription system.
 1. **Quick Setup** (5 minutes)
    ```bash
    # Follow the Quick Start Guide
-   open docsquickstart/QUICK_START.md
+   open docs/quickstart/QUICK_START.md
    ```
 
 2. **Detailed Setup**
@@ -122,10 +122,10 @@ Complete documentation for the Vortis authentication and subscription system.
 3. **Cloudflare Deployment** (RECOMMENDED)
    ```bash
    # Follow the Cloudflare Quick Start
-   open ..cloudflare/CLOUDFLARE_QUICKSTART.md
+   open docs/cloudflare/CLOUDFLARE_QUICKSTART.md
 
    # Or use the detailed checklist
-   open ..cloudflare/CLOUDFLARE_DEPLOYMENT_CHECKLIST.md
+   open docs/cloudflare/CLOUDFLARE_DEPLOYMENT_CHECKLIST.md
    ```
    - Deploy to Vercel
    - Configure Cloudflare DNS

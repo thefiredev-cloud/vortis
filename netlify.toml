@@ -1,0 +1,22 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+  NODE_VERSION = "22"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[dev]
+  command = "npm run dev"
+  port = 3000
+  framework = "next"
+
+[context.deploy-preview]
+  [context.deploy-preview.environment]
+    NEXT_PUBLIC_APP_URL = "https://deploy-preview--YOUR_SITE.netlify.app"
+
+[context.branch-deploy]
+  [context.branch-deploy.environment]
+    NEXT_PUBLIC_APP_URL = "https://BRANCH--YOUR_SITE.netlify.app"
+
+

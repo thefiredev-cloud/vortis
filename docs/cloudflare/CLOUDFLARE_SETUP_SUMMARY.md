@@ -179,13 +179,13 @@ Comprehensive Cloudflare integration documentation has been created for Vortis.
 
 ```bash
 # 1. Read quick start
-open docs/cloudflareCLOUDFLARE_QUICKSTART.md
+open docs/cloudflare/CLOUDFLARE_QUICKSTART.md
 
 # 2. Follow detailed setup
-open /Users/tannerosterkamp/vortis/docs/VERCEL_CLOUDFLARE_SETUP.md
+open docs/setup/SETUP.md
 
 # 3. Use checklist while deploying
-open docs/cloudflareCLOUDFLARE_DEPLOYMENT_CHECKLIST.md
+open docs/cloudflare/CLOUDFLARE_DEPLOYMENT_CHECKLIST.md
 
 # 4. Reference configuration as needed
 open /Users/tannerosterkamp/vortis/docs/CLOUDFLARE_CONFIG_REFERENCE.md
@@ -369,17 +369,17 @@ All documentation created at:
 
 **Most users (recommended):**
 ```bash
-open docs/cloudflareCLOUDFLARE_QUICKSTART.md
+open docs/cloudflare/CLOUDFLARE_QUICKSTART.md
 ```
 
 **Prefer checklist format:**
 ```bash
-open docs/cloudflareCLOUDFLARE_DEPLOYMENT_CHECKLIST.md
+open docs/cloudflare/CLOUDFLARE_DEPLOYMENT_CHECKLIST.md
 ```
 
 **Want detailed guide:**
 ```bash
-open /Users/tannerosterkamp/vortis/docs/VERCEL_CLOUDFLARE_SETUP.md
+open docs/setup/SETUP.md
 ```
 
 ### 2. Prepare Prerequisites
