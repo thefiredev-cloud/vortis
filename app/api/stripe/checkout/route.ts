@@ -131,7 +131,7 @@ export async function POST(request: NextRequest) {
       sessionConfig.client_reference_id = userId;
     }
 
-    const session = await stripe.checkout.sessions.create(sessionConfig);
+    const session = await stripe!.checkout.sessions.create(sessionConfig);
 
     securityLogger.paymentEvent('checkout_started', userId, {
       planName: plan,

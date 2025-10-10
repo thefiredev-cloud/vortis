@@ -57,7 +57,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   let event: Stripe.Event;
 
   try {
-    event = stripe.webhooks.constructEvent(
+    event = stripe!.webhooks.constructEvent(
       body,
       signature,
       process.env.STRIPE_WEBHOOK_SECRET!
@@ -144,7 +144,7 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session):
   }
 
   // Get subscription details to get period dates
-  const stripeSubscription = await stripe.subscriptions.retrieve(subscriptionId);
+  const stripeSubscription = await stripe!.subscriptions.retrieve(subscriptionId);
   const priceId = stripeSubscription.items.data[0].price.id;
 
   // Determine plan name from metadata or price ID
