@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { stripe, STRIPE_ENABLED } from "@/lib/stripe";
 import { logger } from "@/lib/logger";
 import { securityLogger } from "@/lib/security-logger";
 import { RateLimiter, RateLimitPresets, getIdentifier, addRateLimitHeaders } from "@/lib/rate-limit";
@@ -18,6 +18,12 @@ const rateLimiter = new RateLimiter(RateLimitPresets.CHECKOUT);
 
 export async function POST(request: NextRequest) {
   try {
+    if (!STRIPE_ENABLED || !stripe) {
+      return NextResponse.json(
+        { error: "Payments are disabled in this environment" },
+        { status: 503 }
+      );
+    }
     // Get user ID early for rate limiting
     const { userId } = await auth();
 

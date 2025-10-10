@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
-import { stripe } from '@/lib/stripe';
+import { stripe, STRIPE_ENABLED } from '@/lib/stripe';
 import { supabaseAdmin } from '@/lib/supabase/admin';
 import Stripe from 'stripe';
 import { logger } from '@/lib/logger';
@@ -11,6 +11,9 @@ import { RateLimiter, RateLimitPresets, getIdentifier, addRateLimitHeaders } fro
 const rateLimiter = new RateLimiter(RateLimitPresets.WEBHOOK);
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  if (!STRIPE_ENABLED || !stripe) {
+    return NextResponse.json({ error: 'Stripe disabled' }, { status: 503 });
+  }
   // Apply rate limiting (100 requests per minute per IP)
   const identifier = getIdentifier(request, null);
   const rateLimitResult = await rateLimiter.check(identifier);

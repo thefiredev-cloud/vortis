@@ -1,19 +1,21 @@
 import Stripe from 'stripe';
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('STRIPE_SECRET_KEY is not set');
-}
+export const STRIPE_ENABLED = Boolean(
+  process.env.STRIPE_SECRET_KEY && process.env.STRIPE_SECRET_KEY.startsWith('sk_')
+);
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2025-09-30.clover',
-  typescript: true,
-});
+export const stripe: Stripe | null = STRIPE_ENABLED
+  ? new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+      apiVersion: '2025-09-30.clover',
+      typescript: true,
+    })
+  : null;
 
 // Product price IDs - these will be created in Stripe
 export const PRICING_PLANS = {
   starter: {
     name: 'Starter',
-    priceId: process.env.STRIPE_STARTER_PRICE_ID!,
+    priceId: process.env.STRIPE_STARTER_PRICE_ID || '',
     price: 29,
     currency: 'usd',
     interval: 'month',
@@ -33,7 +35,7 @@ export const PRICING_PLANS = {
   },
   pro: {
     name: 'Pro',
-    priceId: process.env.STRIPE_PRO_PRICE_ID!,
+    priceId: process.env.STRIPE_PRO_PRICE_ID || '',
     price: 99,
     currency: 'usd',
     interval: 'month',
@@ -55,7 +57,7 @@ export const PRICING_PLANS = {
   },
   enterprise: {
     name: 'Enterprise',
-    priceId: process.env.STRIPE_ENTERPRISE_PRICE_ID!,
+    priceId: process.env.STRIPE_ENTERPRISE_PRICE_ID || '',
     price: 299,
     currency: 'usd',
     interval: 'month',

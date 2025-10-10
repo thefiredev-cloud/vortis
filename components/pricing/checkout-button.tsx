@@ -22,6 +22,8 @@ export function CheckoutButton({
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
+  const paymentsEnabled = Boolean(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY?.startsWith('pk_'));
+
   const handleCheckout = async () => {
     setIsLoading(true);
 
@@ -36,6 +38,11 @@ export function CheckoutButton({
       if (authError || !user) {
         toast.error("Please sign in to continue");
         router.push("/auth/login?redirect=/pricing");
+        return;
+      }
+
+      if (!paymentsEnabled) {
+        toast.info("Payments are disabled in this preview.");
         return;
       }
 
