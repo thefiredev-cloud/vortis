@@ -28,6 +28,14 @@ export async function POST(request: Request) {
       );
     }
 
+    // Check if Stripe is configured
+    if (!stripe) {
+      return NextResponse.json(
+        { error: "Payment processing is not configured" },
+        { status: 503 }
+      );
+    }
+
     // Create portal session
     const session = await stripe.billingPortal.sessions.create({
       customer: subscription.stripe_customer_id,

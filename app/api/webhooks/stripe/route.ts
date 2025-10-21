@@ -14,6 +14,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   if (!STRIPE_ENABLED || !stripe) {
     return NextResponse.json({ error: 'Stripe disabled' }, { status: 503 });
   }
+
+  // Verify Supabase is configured
+  if (!supabaseAdmin) {
+    return NextResponse.json({ error: 'Database not configured' }, { status: 503 });
+  }
+
   // Apply rate limiting (100 requests per minute per IP)
   const identifier = getIdentifier(request, null);
   const rateLimitResult = await rateLimiter.check(identifier);
@@ -160,7 +166,7 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session):
   const cancelAtEnd = (stripeSubscription as any).cancel_at_period_end;
 
   // Create or update subscription record (upsert to handle duplicates)
-  await supabaseAdmin.from('subscriptions').upsert({
+  await supabaseAdmin!.from('subscriptions').upsert({
     user_id: userId,
     stripe_customer_id: customerId,
     stripe_subscription_id: subscriptionId,
@@ -174,7 +180,7 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session):
 
   // Create usage tracking record (insert only if doesn't exist)
   const analysesLimit = planName === 'starter' ? 100 : -1;
-  await supabaseAdmin.from('usage_tracking').insert({
+  await supabaseAdmin!.from('usage_tracking').insert({
     user_id: userId,
     plan_name: planName,
     analyses_used: 0,
@@ -204,7 +210,7 @@ async function handleSubscriptionUpdate(subscription: Stripe.Subscription): Prom
   if (priceId === process.env.STRIPE_PRO_PRICE_ID) planName = 'pro';
   if (priceId === process.env.STRIPE_ENTERPRISE_PRICE_ID) planName = 'enterprise';
 
-  await supabaseAdmin
+  await supabaseAdmin!
     .from('subscriptions')
     .update({
       stripe_price_id: priceId,
@@ -217,7 +223,7 @@ async function handleSubscriptionUpdate(subscription: Stripe.Subscription): Prom
     .eq('stripe_subscription_id', subscription.id);
 
   // Update usage tracking - find by user_id from subscription
-  const { data: sub } = await supabaseAdmin
+  const { data: sub } = await supabaseAdmin!
     .from('subscriptions')
     .select('user_id')
     .eq('stripe_subscription_id', subscription.id)
@@ -225,7 +231,7 @@ async function handleSubscriptionUpdate(subscription: Stripe.Subscription): Prom
 
   if (sub?.user_id) {
     const analysesLimit = planName === 'starter' ? 100 : -1;
-    await supabaseAdmin
+    await supabaseAdmin!
       .from('usage_tracking')
       .update({
         plan_name: planName,
@@ -243,13 +249,13 @@ async function handleSubscriptionUpdate(subscription: Stripe.Subscription): Prom
 }
 
 async function handleSubscriptionDeleted(subscription: Stripe.Subscription): Promise<void> {
-  const { data: sub } = await supabaseAdmin
+  const { data: sub } = await supabaseAdmin!
     .from('subscriptions')
     .select('user_id')
     .eq('stripe_subscription_id', subscription.id)
     .single();
 
-  await supabaseAdmin
+  await supabaseAdmin!
     .from('subscriptions')
     .update({ status: 'canceled' })
     .eq('stripe_subscription_id', subscription.id);
@@ -272,7 +278,7 @@ async function handleInvoicePaid(invoice: Stripe.Invoice): Promise<void> {
   if (!subscriptionId) return;
 
   // Update subscription status and period dates
-  await supabaseAdmin
+  await supabaseAdmin!
     .from('subscriptions')
     .update({
       status: 'active',
@@ -281,7 +287,7 @@ async function handleInvoicePaid(invoice: Stripe.Invoice): Promise<void> {
     })
     .eq('stripe_subscription_id', subscriptionId);
 
-  const { data: sub } = await supabaseAdmin
+  const { data: sub } = await supabaseAdmin!
     .from('subscriptions')
     .select('user_id')
     .eq('stripe_subscription_id', subscriptionId)
@@ -307,12 +313,12 @@ async function handleInvoicePaymentFailed(invoice: Stripe.Invoice): Promise<void
   if (!subscriptionId) return;
 
   // Update subscription status
-  await supabaseAdmin
+  await supabaseAdmin!
     .from('subscriptions')
     .update({ status: 'past_due' })
     .eq('stripe_subscription_id', subscriptionId);
 
-  const { data: sub } = await supabaseAdmin
+  const { data: sub } = await supabaseAdmin!
     .from('subscriptions')
     .select('user_id')
     .eq('stripe_subscription_id', subscriptionId)

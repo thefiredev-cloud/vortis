@@ -62,6 +62,17 @@ export async function POST(req: Request) {
     );
   }
 
+  // Verify Supabase is configured
+  if (!supabaseAdmin) {
+    securityLogger.configurationError('Supabase', 'Supabase admin client not configured', {
+      endpoint: '/api/webhooks/clerk',
+    });
+    return Response.json(
+      { error: 'Database not configured' },
+      { status: 503 }
+    );
+  }
+
   // Verify webhook secret is configured
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
 

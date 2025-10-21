@@ -1,9 +1,23 @@
 import Link from "next/link";
 import { StockSearch } from "@/components/dashboard/stock-search";
-import { TrendingUp } from "lucide-react";
+import { Watchlist } from "@/components/dashboard/watchlist";
+import { AnalyticsCard } from "@/components/dashboard/analytics-card";
+import { TrendingUp, Search, Star, Zap } from "lucide-react";
 import { designTokens } from "@/lib/design-tokens";
 
 export default function DashboardPage() {
+  // Mock data - in production, fetch from API
+  const mockWatchlistItems: Array<{
+    id: string;
+    ticker: string;
+    companyName: string;
+    currentPrice: number;
+    priceChange: number;
+    percentChange: number;
+    alertEnabled: boolean;
+    alertPrice?: number;
+  }> = [];
+
   return (
     <div className="space-y-6">
       {/* Welcome Card */}
@@ -17,28 +31,54 @@ export default function DashboardPage() {
       {/* Search Bar */}
       <StockSearch />
 
-      {/* Stats Grid */}
+      {/* Stats Grid - Enhanced with AnalyticsCard */}
       <div className={designTokens.grid.stats}>
-        <div className={designTokens.card.base}>
-          <p className={designTokens.text.small}>Analyses This Month</p>
-          <p className="text-3xl font-bold text-white mt-1">0</p>
-          <p className="text-xs text-emerald-400 mt-2">0 of 100 used</p>
-        </div>
-        <div className={designTokens.card.base}>
-          <p className={designTokens.text.small}>Watchlist Items</p>
-          <p className="text-3xl font-bold text-white mt-1">0</p>
-        </div>
-        <div className={designTokens.card.base}>
-          <p className={designTokens.text.small}>Current Plan</p>
-          <p className="text-3xl font-bold text-white mt-1">Free</p>
-          <Link
-            href="/pricing"
-            className="text-xs text-emerald-400 hover:text-emerald-300 mt-2 inline-block transition-colors"
-          >
-            Upgrade →
-          </Link>
-        </div>
+        <AnalyticsCard
+          title="Analyses This Month"
+          value="0 / 100"
+          icon={Search}
+          iconColor="text-emerald-400"
+          description="Starter plan limit"
+        />
+        <AnalyticsCard
+          title="Watchlist Items"
+          value={mockWatchlistItems.length}
+          icon={Star}
+          iconColor="text-cyan-400"
+          description="Stocks you're tracking"
+        />
+        <AnalyticsCard
+          title="Current Plan"
+          value="Free"
+          icon={Zap}
+          iconColor="text-purple-400"
+          description={
+            <Link
+              href="/pricing"
+              className="text-emerald-400 hover:text-emerald-300 transition-colors"
+            >
+              Upgrade →
+            </Link>
+          }
+        />
       </div>
+
+      {/* Watchlist Section */}
+      <Watchlist
+        items={mockWatchlistItems}
+        onAdd={(ticker) => {
+          // TODO: Implement add to watchlist
+          console.log('Add to watchlist:', ticker);
+        }}
+        onRemove={(id) => {
+          // TODO: Implement remove from watchlist
+          console.log('Remove from watchlist:', id);
+        }}
+        onToggleAlert={(id) => {
+          // TODO: Implement toggle alert
+          console.log('Toggle alert:', id);
+        }}
+      />
 
       {/* Recent Analyses */}
       <div className={designTokens.card.base}>

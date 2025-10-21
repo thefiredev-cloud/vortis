@@ -1,12 +1,11 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
-import Stripe from "stripe";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-09-30.clover",
-});
+import { stripe, STRIPE_ENABLED } from "@/lib/stripe";
 
 export async function POST(request: Request) {
+  if (!STRIPE_ENABLED || !stripe) {
+    return NextResponse.json({ error: 'Stripe disabled' }, { status: 503 });
+  }
   try {
     const supabase = await createClient();
     const {
