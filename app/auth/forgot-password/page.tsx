@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AuthLayout } from "@/components/auth/auth-layout";
@@ -15,7 +15,7 @@ export const dynamic = 'force-dynamic';
  * password reset is not applicable. This page informs users
  * and redirects them to the login page.
  */
-export default function ForgotPasswordPage() {
+function ForgotPasswordContent() {
   const router = useRouter();
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function ForgotPasswordPage() {
             Google Sign-In Only
           </h3>
           <p className="text-slate-300 text-sm">
-            Vortis uses Google OAuth for secure authentication. You don't need to
+            Vortis uses Google OAuth for secure authentication. You don&apos;t need to
             manage a separate password. Simply sign in with your Google account.
           </p>
         </div>
@@ -50,10 +50,10 @@ export default function ForgotPasswordPage() {
       {/* Explanation */}
       <div className="space-y-4 text-slate-400 text-sm mb-8">
         <p>
-          If you're having trouble accessing your account:
+          If you&apos;re having trouble accessing your account:
         </p>
         <ul className="list-disc list-inside space-y-2 ml-2">
-          <li>Make sure you're using the correct Google account</li>
+          <li>Make sure you&apos;re using the correct Google account</li>
           <li>Check if you have access to your Google account</li>
           <li>
             Visit{" "}
@@ -93,8 +93,23 @@ export default function ForgotPasswordPage() {
 
       {/* Auto-redirect notice */}
       <p className="mt-4 text-xs text-center text-slate-500">
-        You'll be redirected to the login page in a few seconds...
+        You&apos;ll be redirected to the login page in a few seconds...
       </p>
     </AuthLayout>
+  );
+}
+
+export default function ForgotPasswordPage() {
+  return (
+    <Suspense fallback={
+      <AuthLayout
+        title="Loading..."
+        showBackLink={false}
+      >
+        <div className="text-center text-slate-400">Loading...</div>
+      </AuthLayout>
+    }>
+      <ForgotPasswordContent />
+    </Suspense>
   );
 }
