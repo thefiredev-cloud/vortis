@@ -1,17 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from '@clerk/nextjs';
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// Using system fonts as fallback when Google Fonts unavailable
+const fontVariables = "font-sans";
 
 export const metadata: Metadata = {
   title: "Vortis - AI-Powered Trading Intelligence",
@@ -102,7 +94,7 @@ export default function RootLayout({
             <link rel="apple-touch-icon" href="/icon.png" />
           </head>
           <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            className={`${fontVariables} antialiased`}
           >
             {children}
           </body>
@@ -117,7 +109,7 @@ export default function RootLayout({
           <link rel="apple-touch-icon" href="/icon.png" />
         </head>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${fontVariables} antialiased`}
         >
           <div className="fixed inset-x-0 top-0 z-50 bg-yellow-500 text-black text-sm text-center py-2">
             Auth disabled: set NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY to enable Clerk.
