@@ -4,6 +4,14 @@ import { stripe } from "@/lib/stripe";
 
 export async function POST(request: Request) {
   try {
+    // Check if Stripe is configured
+    if (!stripe) {
+      return NextResponse.json(
+        { error: "Stripe not configured" },
+        { status: 503 }
+      );
+    }
+
     const supabase = await createClient();
     const {
       data: { user },
