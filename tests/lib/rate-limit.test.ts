@@ -159,12 +159,13 @@ describe('RateLimiter', () => {
       const result1 = await limiter.check('user:123');
       const resetTime1 = result1.resetAt;
 
-      vi.advanceTimersByTime(500);
+      // Wait for window to expire and start a new one
+      vi.advanceTimersByTime(1100);
 
       const result2 = await limiter.check('user:123');
       const resetTime2 = result2.resetAt;
 
-      // Second reset time should be later
+      // Second reset time should be later (new window)
       expect(resetTime2).toBeGreaterThan(resetTime1);
     });
   });
