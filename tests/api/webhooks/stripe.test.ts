@@ -11,6 +11,7 @@ import Stripe from 'stripe';
 
 // Mock the dependencies
 vi.mock('@/lib/stripe', () => ({
+  STRIPE_ENABLED: true,
   stripe: {
     webhooks: {
       constructEvent: vi.fn(),

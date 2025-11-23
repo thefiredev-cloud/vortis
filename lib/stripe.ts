@@ -4,8 +4,13 @@ export const STRIPE_ENABLED = Boolean(
   process.env.STRIPE_SECRET_KEY && process.env.STRIPE_SECRET_KEY.startsWith('sk_')
 );
 
+// Use placeholder key for build time if not configured
+const STRIPE_KEY = STRIPE_ENABLED
+  ? process.env.STRIPE_SECRET_KEY as string
+  : 'sk_test_placeholder_key_for_build';
+
 export const stripe: Stripe | null = STRIPE_ENABLED
-  ? new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+  ? new Stripe(STRIPE_KEY, {
       apiVersion: '2025-09-30.clover',
       typescript: true,
     })
