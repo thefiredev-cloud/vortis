@@ -398,7 +398,7 @@ export async function GET(
     );
 
   } catch (error) {
-    const duration = Date.now() - startTime;
+    const _duration = Date.now() - startTime;
     console.error('[ANALYSIS] Unexpected error:', error);
 
     // Log detailed error information
