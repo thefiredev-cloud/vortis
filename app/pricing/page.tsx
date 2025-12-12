@@ -4,7 +4,6 @@ import { OrbBackground } from "@/components/ui/orb-background";
 import { GradientText } from "@/components/ui/gradient-text";
 import { BlurText } from "@/components/ui/blur-text";
 import { AnimatedCard } from "@/components/ui/animated-card";
-import { ShinyButton } from "@/components/ui/shiny-button";
 import { FeatureComparison } from "@/components/sections/feature-comparison";
 import { TrustBadges } from "@/components/sections/trust-badges";
 import { FAQ } from "@/components/sections/faq";
