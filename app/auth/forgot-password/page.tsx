@@ -50,7 +50,7 @@ export default function ForgotPasswordPage() {
       {/* Explanation */}
       <div className="space-y-4 text-slate-400 text-sm mb-8">
         <p>
-          If you're having trouble accessing your account:
+          If you&apos;re having trouble accessing your account:
         </p>
         <ul className="list-disc list-inside space-y-2 ml-2">
           <li>Make sure you're using the correct Google account</li>
