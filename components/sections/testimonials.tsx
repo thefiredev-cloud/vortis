@@ -1,6 +1,5 @@
 "use client";
 
-import { FadeIn } from "@/components/ui/fade-in";
 import { GradientText } from "@/components/ui/gradient-text";
 import { AnimatedCard } from "@/components/ui/animated-card";
 
