@@ -1,4 +1,3 @@
-import { Loader2 } from "lucide-react";
 import { OrbBackground } from "@/components/ui/orb-background";
 
 /**
