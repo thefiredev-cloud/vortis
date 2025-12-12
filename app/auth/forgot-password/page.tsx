@@ -41,7 +41,7 @@ export default function ForgotPasswordPage() {
             Google Sign-In Only
           </h3>
           <p className="text-slate-300 text-sm">
-            Vortis uses Google OAuth for secure authentication. You don't need to
+            Vortis uses Google OAuth for secure authentication. You don&apos;t need to
             manage a separate password. Simply sign in with your Google account.
           </p>
         </div>
