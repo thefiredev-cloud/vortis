@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
 interface GridPatternProps {
   className?: string;
   strokeWidth?: number;
@@ -13,7 +11,7 @@ export function GridPattern({
   className = "",
   strokeWidth = 1,
   gridSize = 50,
-  opacity = 0.1,
+  opacity: _opacity = 0.1,
 }: GridPatternProps) {
   return (
     <div className={`absolute inset-0 -z-10 ${className}`}>
