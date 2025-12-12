@@ -93,7 +93,7 @@ export default function ForgotPasswordPage() {
 
       {/* Auto-redirect notice */}
       <p className="mt-4 text-xs text-center text-slate-500">
-        You'll be redirected to the login page in a few seconds...
+        You&apos;ll be redirected to the login page in a few seconds...
       </p>
     </AuthLayout>
   );
