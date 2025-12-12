@@ -470,3 +470,86 @@ button, a {
     transform: none !important;
   }
 }
+
+/* ===== Accessibility Styles ===== */
+
+/* Focus visible styles for keyboard navigation */
+:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+}
+
+/* Remove outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Allow sr-only elements to become visible on focus */
+.sr-only:focus,
+.sr-only:active,
+.sr-only.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Financial Data Styles */
+.price-positive {
+  color: #22c55e;
+}
+
+.price-negative {
+  color: #ef4444;
+}
+
+@keyframes pulse-positive {
+  0%, 100% { background-color: rgba(34, 197, 94, 0.1); }
+  50% { background-color: rgba(34, 197, 94, 0.2); }
+}
+
+@keyframes pulse-negative {
+  0%, 100% { background-color: rgba(239, 68, 68, 0.1); }
+  50% { background-color: rgba(239, 68, 68, 0.2); }
+}
+
+.price-flash-up {
+  animation: pulse-positive 0.5s ease-out;
+}
+
+.price-flash-down {
+  animation: pulse-negative 0.5s ease-out;
+}
+
+/* Animate in utility for slide-in-from-bottom */
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in.slide-in-from-bottom {
+  animation: slideInFromBottom 0.3s ease-out forwards;
+}
