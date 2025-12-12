@@ -100,10 +100,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       }
     }
 
-    // TODO: Connect to Octagon MCP for actual stock data
-    // For now, we'll return a mock response
+    // AI-powered stock analysis with Claude Opus 4.5
     const endTimer = logger.time('stock-analysis');
-    const analysis = await analyzeStock(sanitizedTicker);
+    const analysis = AI_ENABLED
+      ? await analyzeStockWithAI({
+          ticker: sanitizedTicker,
+          analysisType: userId ? 'comprehensive' : 'technical',
+        })
+      : generateMockAnalysis(sanitizedTicker);
     endTimer();
 
     // Store the analysis
@@ -113,7 +117,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       analysis_type: userId ? 'basic' : 'free',
       request_data: { ticker },
       response_data: analysis,
-      ai_model: 'claude-sonnet-4.5',
+      ai_model: AI_MODEL_DISPLAY,
     });
 
     // Update usage tracking if user is authenticated
