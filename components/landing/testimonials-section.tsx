@@ -120,11 +120,9 @@ function TestimonialCard({ testimonial, delay = 0 }: TestimonialCardProps) {
           {/* Avatar */}
           <div className="flex-shrink-0">
             {testimonial.avatarUrl ? (
-              <img
-                src={testimonial.avatarUrl}
-                alt=""
-                className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover"
-                loading="lazy"
+              <div
+                className={`w-12 h-12 md:w-14 md:h-14 bg-gradient-to-r ${testimonial.gradient} rounded-full`}
+                aria-hidden="true"
               />
             ) : (
               <div
