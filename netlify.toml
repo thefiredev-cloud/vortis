@@ -11,12 +11,43 @@
   port = 3000
   framework = "next"
 
+# Production environment
+[context.production]
+  [context.production.environment]
+    NEXT_PUBLIC_APP_URL = "https://vortis.io"
+    NEXT_PUBLIC_SITE_NAME = "Vortis"
+
+# Preview deployments
 [context.deploy-preview]
   [context.deploy-preview.environment]
-    NEXT_PUBLIC_APP_URL = "https://deploy-preview--YOUR_SITE.netlify.app"
+    NEXT_PUBLIC_APP_URL = "https://deploy-preview--vortis.netlify.app"
 
+# Branch deployments
 [context.branch-deploy]
   [context.branch-deploy.environment]
-    NEXT_PUBLIC_APP_URL = "https://BRANCH--YOUR_SITE.netlify.app"
+    NEXT_PUBLIC_APP_URL = "https://BRANCH--vortis.netlify.app"
+
+# Redirects - www to apex domain
+[[redirects]]
+  from = "https://www.vortis.io/*"
+  to = "https://vortis.io/:splat"
+  status = 301
+  force = true
+
+# Redirect netlify subdomain to custom domain
+[[redirects]]
+  from = "https://vortis.netlify.app/*"
+  to = "https://vortis.io/:splat"
+  status = 301
+  force = true
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "all"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
 
 
