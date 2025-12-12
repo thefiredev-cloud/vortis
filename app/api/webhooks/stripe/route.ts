@@ -302,7 +302,7 @@ async function handleInvoicePaid(invoice: Stripe.Invoice): Promise<void> {
 }
 
 async function handleInvoicePaymentFailed(invoice: Stripe.Invoice): Promise<void> {
-  const subscriptionId = (invoice as any).subscription as string | null;
+  const subscriptionId = (invoice as unknown as { subscription?: string | null }).subscription ?? null;
 
   if (!subscriptionId) return;
 
