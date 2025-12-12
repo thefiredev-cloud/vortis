@@ -1,0 +1,16 @@
+# Vortis.io - AI-Powered Trading Intelligence
+# https://vortis.io
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /auth/
+Disallow: /sign-in/
+Disallow: /sign-up/
+
+# Sitemap
+Sitemap: https://vortis.io/sitemap.xml
+
+# Crawl-delay for responsible crawling
+Crawl-delay: 1
