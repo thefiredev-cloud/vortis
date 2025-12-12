@@ -39,7 +39,7 @@ export function Testimonials() {
             <AnimatedCard key={testimonial.id} delay={0.1 * idx}>
               <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 h-full touch-manipulation hover:border-white/20 transition-all active:scale-[0.98]">
                 <p className="text-slate-300 mb-6 text-sm md:text-base leading-relaxed">
-                  "{testimonial.quote}"
+                  &quot;{testimonial.quote}&quot;
                 </p>
                 <div className="flex items-center gap-3">
                   <div
