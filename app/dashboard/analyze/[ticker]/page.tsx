@@ -183,7 +183,7 @@ function AnalysisPageContent() {
 
           setIsInWatchlist(!!data);
         }
-      } catch (err) {
+      } catch (_err) {
         // Not in watchlist or error checking
         setIsInWatchlist(false);
       }
