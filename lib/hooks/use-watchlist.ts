@@ -207,7 +207,7 @@ export function useUpdateStock() {
     mutationFn: async ({
       itemId,
       userId,
-      watchlistId,
+      watchlistId: _watchlistId,
       params,
     }: {
       itemId: string;
