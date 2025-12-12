@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { stripe } from "@/lib/stripe";
 
-export async function POST(request: Request) {
+export async function POST(_request: Request) {
   try {
     // Check if Stripe is configured
     if (!stripe) {

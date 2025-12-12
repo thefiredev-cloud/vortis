@@ -92,19 +92,14 @@ interface StockAnalysis {
   timestamp: string;
 }
 
-interface PlanLimits {
+// Plan limits are defined in subscription service
+// Keeping interface for reference
+interface _PlanLimits {
   free: number;
   starter: number;
   pro: number;
   enterprise: number;
 }
-
-const PLAN_LIMITS: PlanLimits = {
-  free: 5,
-  starter: 100,
-  pro: 500,
-  enterprise: -1, // unlimited
-};
 
 /**
  * Validates stock ticker format
