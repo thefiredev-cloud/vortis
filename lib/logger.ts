@@ -127,7 +127,7 @@ class Logger {
       entry.error = {
         message: error.message,
         stack: this.environment === 'production' ? undefined : error.stack,
-        code: (error as any).code,
+        code: (error as Error & { code?: string }).code,
       };
     }
 
