@@ -15,13 +15,45 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vortis - AI-Powered Trading Intelligence",
-  description: "Access comprehensive financial intelligence from 8,000+ public companies. Analyze SEC filings, earnings transcripts, and institutional holdings in seconds.",
+  metadataBase: new URL('https://vortis.io'),
+  title: {
+    default: "Vortis - AI-Powered Trading Intelligence",
+    template: "%s | Vortis",
+  },
+  description: "Access comprehensive financial intelligence from 8,000+ public companies. Analyze SEC filings, earnings transcripts, and institutional holdings in seconds with Claude Opus 4.5 AI.",
+  keywords: [
+    "stock analysis",
+    "SEC filings",
+    "trading intelligence",
+    "financial AI",
+    "market research",
+    "earnings analysis",
+    "institutional holdings",
+    "13F filings",
+    "technical indicators",
+    "investment research",
+  ],
+  authors: [{ name: "Vortis", url: "https://vortis.io" }],
+  creator: "Vortis",
+  publisher: "Vortis",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://vortis.io",
+  },
   viewport: {
     width: "device-width",
     initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
+    maximumScale: 5,
     viewportFit: "cover",
   },
   themeColor: "#10b981",
@@ -36,7 +68,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://vortis.ai",
+    url: "https://vortis.io",
     siteName: "Vortis",
     title: "Vortis - AI-Powered Trading Intelligence",
     description: "Access comprehensive financial intelligence from 8,000+ public companies. Analyze SEC filings, earnings transcripts, and institutional holdings in seconds.",
@@ -54,6 +86,7 @@ export const metadata: Metadata = {
     title: "Vortis - AI-Powered Trading Intelligence",
     description: "Access comprehensive financial intelligence from 8,000+ public companies. Analyze SEC filings, earnings transcripts, and institutional holdings in seconds.",
     images: ["/og-image.png"],
+    creator: "@vortis_io",
   },
 };
 
