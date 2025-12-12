@@ -155,9 +155,9 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session):
     if (priceId === process.env.STRIPE_ENTERPRISE_PRICE_ID) planName = 'enterprise';
   }
 
-  const periodStart = (stripeSubscription as any).current_period_start;
-  const periodEnd = (stripeSubscription as any).current_period_end;
-  const cancelAtEnd = (stripeSubscription as any).cancel_at_period_end;
+  const periodStart = (stripeSubscription as unknown as { current_period_start?: number }).current_period_start;
+  const periodEnd = (stripeSubscription as unknown as { current_period_end?: number }).current_period_end;
+  const cancelAtEnd = (stripeSubscription as unknown as { cancel_at_period_end?: boolean }).cancel_at_period_end;
 
   // Create or update subscription record (upsert to handle duplicates)
   await supabaseAdmin.from('subscriptions').upsert({
