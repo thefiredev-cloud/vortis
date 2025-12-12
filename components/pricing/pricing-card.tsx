@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Check, Loader2 } from "lucide-react";
 import { ShinyButton } from "@/components/ui/shiny-button";
-import { useRouter } from "next/navigation";
 
 interface PricingCardProps {
   name: string;
@@ -24,7 +23,6 @@ export function PricingCard({
   plan,
   isEnterprise = false,
 }: PricingCardProps) {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleCheckout = async () => {
