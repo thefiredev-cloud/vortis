@@ -3,6 +3,8 @@ import { createClient } from '@/lib/supabase/server';
 import { logger } from '@/lib/logger';
 import { securityLogger } from '@/lib/security-logger';
 import { RateLimiter, RateLimitPresets, getIdentifier, addRateLimitHeaders } from '@/lib/rate-limit';
+import { analyzeStockWithAI, generateMockAnalysis } from '@/lib/ai/stock-analysis-ai.service';
+import { AI_MODEL_DISPLAY, AI_ENABLED } from '@/lib/ai/anthropic-client';
 
 // Ticker validation regex: 1-5 uppercase letters only
 const TICKER_REGEX = /^[A-Z]{1,5}$/;
