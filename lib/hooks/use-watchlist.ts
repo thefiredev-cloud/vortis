@@ -236,7 +236,7 @@ export function useRemoveStock() {
     mutationFn: async ({
       itemId,
       userId,
-      watchlistId,
+      watchlistId: _watchlistId,
     }: {
       itemId: string;
       userId: string;
