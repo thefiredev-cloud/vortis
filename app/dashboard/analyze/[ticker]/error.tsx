@@ -21,7 +21,6 @@ interface AnalysisErrorProps {
 }
 
 export default function AnalysisError({ error, reset }: AnalysisErrorProps) {
-  const router = useRouter();
   const params = useParams();
   const ticker = (params.ticker as string)?.toUpperCase() || "UNKNOWN";
   const [isRetrying, setIsRetrying] = useState(false);
