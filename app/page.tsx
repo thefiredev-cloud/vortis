@@ -138,8 +138,66 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="border-t border-slate-800 py-12">
-          <div className="container mx-auto px-6 text-center text-slate-400">
-            <p>&copy; {new Date().getFullYear()} Vortis. Revolutionary AI-powered trading intelligence.</p>
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+              {/* Brand */}
+              <div className="md:col-span-1">
+                <h3 className="text-xl font-bold text-white mb-4">Vortis</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  AI-powered trading intelligence for serious investors. Analyze 8,000+ companies with Claude Opus 4.5.
+                </p>
+              </div>
+
+              {/* Product */}
+              <div>
+                <h4 className="text-white font-semibold mb-4">Product</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><a href="/pricing" className="text-slate-400 hover:text-emerald-400 transition-colors">Pricing</a></li>
+                  <li><a href="/dashboard" className="text-slate-400 hover:text-emerald-400 transition-colors">Dashboard</a></li>
+                  <li><span className="text-slate-500">API (Coming Soon)</span></li>
+                </ul>
+              </div>
+
+              {/* Company */}
+              <div>
+                <h4 className="text-white font-semibold mb-4">Company</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><a href="mailto:contact@vortis.io" className="text-slate-400 hover:text-emerald-400 transition-colors">Contact</a></li>
+                  <li><a href="mailto:support@vortis.io" className="text-slate-400 hover:text-emerald-400 transition-colors">Support</a></li>
+                </ul>
+              </div>
+
+              {/* Legal */}
+              <div>
+                <h4 className="text-white font-semibold mb-4">Legal</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><a href="/terms" className="text-slate-400 hover:text-emerald-400 transition-colors">Terms of Service</a></li>
+                  <li><a href="/privacy" className="text-slate-400 hover:text-emerald-400 transition-colors">Privacy Policy</a></li>
+                  <li><a href="/cookies" className="text-slate-400 hover:text-emerald-400 transition-colors">Cookie Policy</a></li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Bottom Bar */}
+            <div className="pt-8 border-t border-slate-800">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p className="text-slate-400 text-sm">
+                  &copy; {new Date().getFullYear()} Vortis. All rights reserved.
+                </p>
+                <div className="flex items-center gap-6 text-xs text-slate-500">
+                  <span className="flex items-center gap-1">
+                    <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                    All systems operational
+                  </span>
+                  <span>SOC 2 Type II</span>
+                  <span>GDPR Compliant</span>
+                </div>
+              </div>
+              <p className="text-xs text-slate-500 mt-4 text-center">
+                Vortis does not provide investment advice. All information is for educational and informational purposes only.
+                Past performance does not guarantee future results. Always consult with a qualified financial advisor.
+              </p>
+            </div>
           </div>
         </footer>
       </div>
