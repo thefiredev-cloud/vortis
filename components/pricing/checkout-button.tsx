@@ -15,7 +15,7 @@ interface CheckoutButtonProps {
 
 export function CheckoutButton({
   planName,
-  priceId,
+  priceId: _priceId,
   className,
   children,
 }: CheckoutButtonProps) {
