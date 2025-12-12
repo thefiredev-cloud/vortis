@@ -210,8 +210,8 @@ async function handleSubscriptionUpdate(subscription: Stripe.Subscription): Prom
       stripe_price_id: priceId,
       plan_name: planName,
       status: subscription.status,
-      current_period_start: new Date((subscription as any).current_period_start * 1000).toISOString(),
-      current_period_end: new Date((subscription as any).current_period_end * 1000).toISOString(),
+      current_period_start: new Date((subscription as unknown as { current_period_start: number }).current_period_start * 1000).toISOString(),
+      current_period_end: new Date((subscription as unknown as { current_period_end: number }).current_period_end * 1000).toISOString(),
       cancel_at_period_end: subscription.cancel_at_period_end,
     })
     .eq('stripe_subscription_id', subscription.id);
